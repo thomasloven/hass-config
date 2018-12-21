@@ -1,0 +1,43 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: "mysensors"
+
+  customize_glob:
+    sensor.vardagsrum_0:
+      <<: *common
+      friendly_name: Vardagsrummet
+    sensor.elmatare_*:
+      <<: *common
+    sensor.elmatare_20*:
+      hidden: true
+    sensor.elmatare_0:
+      friendly_name: Utomhus
+    sensor.power_meter:
+      <<: *common
+      friendly_name: Elförbrukning
+
+    light.skrivbordslampa_1:
+      <<: *common
+      friendly_name: Skrivbordslampa
+
+
+mysensors:
+  gateways:
+    - device: !secret swarm_ip
+      tcp_port: !secret mysensors_port
+      nodes:
+        2: { name: Vardagsrum }
+        24: { name: Skrivbordslampa }
+        26: { name: Elmätare }
+  version: 2.0
+
+# The power meter has two values for one sensor, and which one is logged is a bit random. Therefore replace it with a custom template sensor which always gets the correct value
+
+sensor:
+  - platform: template
+    sensors:
+      power_meter:
+        value_template: "{{ states.sensor.elmatare_20.attributes.V_WATT }}"
+        unit_of_measurement: 'W'

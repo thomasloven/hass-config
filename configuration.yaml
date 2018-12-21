@@ -7,6 +7,8 @@ homeassistant:
   time_zone: !secret timezone_home
   unit_system: metric
 
+  packages: !include_dir_named packages
+
 frontend:
 discovery:
 history:
