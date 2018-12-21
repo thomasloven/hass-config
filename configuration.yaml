@@ -1,0 +1,14 @@
+homeassistant:
+  name: Åvägen
+
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  elevation: !secret elevation_home
+  time_zone: !secret timezone_home
+  unit_system: metric
+
+frontend:
+discovery:
+history:
+logbook:
+config:
