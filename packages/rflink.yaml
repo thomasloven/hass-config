@@ -1,0 +1,50 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: "rflink"
+
+  customize_glob:
+    light.ute_framsidan:
+      <<: *common
+    light.trappbelysning:
+      <<: *common
+    light.kontor_fonster:
+      <<: *common
+    light.deko_vardagsrum:
+      <<: *common
+    light.skotbord:
+      <<: *common
+    light.bokhyll:
+      <<: *common
+    switch.motorvarmare:
+      <<: *common
+
+rflink:
+  host: !secret swarm_ip
+  port: !secret rflink_port
+
+
+light:
+  - platform: rflink
+    automatic_add: false
+    devices:
+      newkaku_0008f252_1:
+        name: Ute Framsidan
+      ab400d_000042_2:
+        name: Trappbelysning
+      unitec_e1b8_01:
+        name: Kontor Fönster
+      unitec_e1b8_02:
+        name: Deko Vardagsrum
+      newkaku_01b029f6_1:
+        name: Skötbord
+      newkaku_01b029f6_3:
+        name: Bokhylla
+
+switch:
+  - platform: rflink
+    devices:
+      newkaku_018cf7f6_10:
+        name: Motorvärmare
+
