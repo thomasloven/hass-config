@@ -1,0 +1,87 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: 'cameras'
+
+    camera.kontor:
+      <<: *common
+    camera.vardagsrum:
+      <<: *common
+    camera.barnrum:
+      <<: *common
+
+    switch.barnrum_ptz_left:
+      <<: *common
+      hidden: true
+      icon: mdi:chevron-left
+    switch.barnrum_ptz_right:
+      <<: *common
+      hidden: true
+      icon: mdi:chevron-right
+    switch.barnrum_ptz_up:
+      <<: *common
+      hidden: true
+      icon: mdi:chevron-up
+    switch.barnrum_ptz_down:
+      <<: *common
+      hidden: true
+      icon: mdi:chevron-down
+
+ffmpeg:
+
+camera:
+  - name: Kontor
+    platform: mjpeg
+    mjpeg_url: !secret camera_kontor_mjpeg
+    still_image_url: !secret camera_kontor_still
+    username: !secret camera_kontor_username
+    password: !secret camera_kontor_password
+
+  - name: Vardagsrum
+    platform: mjpeg
+    mjpeg_url: !secret camera_vardagsrum_mjpeg
+    still_image_url: !secret camera_vardagsrum_still
+    username: !secret camera_vardagsrum_username
+    password: !secret camera_vardagsrum_password
+
+  - name: Barnrum
+    platform: onvif
+    host: !secret camera_barnrum_host
+    port: !secret camera_barnrum_port
+    username: !secret camera_barnrum_username
+    password: !secret camera_barnrum_password
+
+switch:
+  - platform: template
+    switches:
+      barnrum_ptz_left:
+        <<: &ptz_switch
+          value_template: "{{ True }}"
+          turn_on:
+        turn_off:
+          - service: script.camera_ptz
+            data:
+              entity_id: camera.barnrum
+              dir: left
+      barnrum_ptz_right:
+        <<: *ptz_switch
+        turn_off:
+          - service: script.camera_ptz
+            data:
+              entity_id: camera.barnrum
+              dir: right
+      barnrum_ptz_up:
+        <<: *ptz_switch
+        turn_off:
+          - service: script.camera_ptz
+            data:
+              entity_id: camera.barnrum
+              dir: up
+      barnrum_ptz_down:
+        <<: *ptz_switch
+        turn_off:
+          - service: script.camera_ptz
+            data:
+              entity_id: camera.barnrum
+              dir: down

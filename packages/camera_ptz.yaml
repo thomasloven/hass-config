@@ -1,0 +1,20 @@
+homeassistant:
+  customize:
+    script.camera_ptz:
+      package: "camera_ptz"
+
+script:
+  camera_ptz:
+    sequence:
+      - service: camera.onvif_ptz
+        data_template:
+          entity_id: "{{ entity_id }}"
+          pan: >
+            {{ {"left":"LEFT", "right":"RIGHT", "up":"NONE", "down":"NONE"}[dir] }}
+          tilt: >
+            {{ {"left":"NONE", "right":"NONE", "up":"UP", "down":"DOWN"}[dir] }}
+      - delay:
+          milliseconds: 100
+      - service: camera.onvif_ptz
+        data_template:
+          entity_id: "{{ entity_id }}"
