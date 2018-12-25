@@ -3,3 +3,7 @@
 !.gitignore
 !configuration.yaml
 !packages/
+**/__pycache__/
+!/appdaemon/
+/appdaemon/*
+!/appdaemon/apps
