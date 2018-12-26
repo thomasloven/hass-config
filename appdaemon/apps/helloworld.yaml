@@ -1,4 +1,9 @@
+global_modules:
+  - base
+
 hello_world:
+  global_dependencies:
+    - base
   module: hello
   class: HelloWorld
 
