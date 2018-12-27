@@ -89,6 +89,8 @@ class Entities(Base):
 
         def __getattr__(self, key):
             if key == 'state':
+                if self.get_state:
+                    return self.get_state()
                 return self._hass.get_state(self._entity)
             return self._hass.get_state(self._entity,
                     attribute=key)
@@ -97,6 +99,8 @@ class Entities(Base):
                 self.__dict__[key] = value
                 return
             if key == 'state':
+                if self.set_state:
+                    self.set_state(value)
                 return self._hass.set_state(self._entity, state=value)
             attr = self._hass.get_state(self._entity,
                     attribute='all')
@@ -113,14 +117,10 @@ class Entities(Base):
             self._hass.set_state(self._entity, attributes=attr)
 
     class LightEntity(Entities.Entity):
-        def __init__(self, hass, entity):
-            super().__init__(hass, entity)
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
 
-        @property
-        def state(self):
-            return super().state
-        @state.setter
-        def state(self, state):
+        def set_state(self, state):
             if state == 'on':
                 self._hass.call_service('light/turn_on', entity_id =
                         self._entity)
@@ -129,5 +129,3 @@ class Entities(Base):
                         self._entity)
             else:
                 return
-            super(Entities.LightEntity, self.__class__).state.fset(self,
-                    state)
