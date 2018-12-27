@@ -46,7 +46,11 @@ class Entities(Base):
         self.e = {}
 
     def register_entity(self, name, entity):
-        self.e[name] = Entities.Entity(self, entity)
+        domain, _ = entity.split('.')
+        controller = {
+                'light': Entities.LightEntity,
+                }.get(domain, Entities.Entity)
+        self.e[name] = controller(self, entity)
 
     class Entity:
         def __init__(self, hass, entity):
@@ -90,3 +94,20 @@ class Entities(Base):
                 d = self.attributes
                 d[key] = value
                 self.hass.set_state(self.entity, attributes=d)
+
+    class LightEntity(Entities.Entity):
+        def __init__(self, hass, entity):
+            hass.log("Adding a light")
+            super().__init__(hass, entity)
+        @property
+        def state(self):
+            return super().state
+        @state.setter
+        def state(self, state):
+            if state == 'on':
+                self.hass.call_service('light/turn_on', entity_id = self.entity)
+            elif state == 'off':
+                self.hass.call_service('light/turn_off', entity_id = self.entity)
+            else:
+                return
+            super(Entities.LightEntity, self.__class__).state.fset(self, state)

@@ -17,7 +17,9 @@ class HelloWorld(base.Entities, base.Timers):
 
     def after_time(self, kwargs):
         self.log("Running function")
-        self.e['taklampa']['icon'] = "mdi:lamp"
+        self.e['taklampa']['state'] = "off"
+        self.log(f"State is {self.e['taklampa']['state']}")
     def after_time2(self, kwargs):
         self.log("Running function2")
-        self.e['taklampa']['icon'] = "mdi:lightbulb"
+        self.e['taklampa']['state'] = "on"
+        self.log(f"State is {self.e['taklampa']['state']}")
