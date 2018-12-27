@@ -54,10 +54,9 @@ class Entities(Base):
 
     class Entity:
         def __init__(self, hass, entity):
-            self.entity = entity
-            self.domain, self.name = entity.split('.')
-            self.hass = hass
-            self.hass.listen_state(self._listener, entity=entity, attributes='all')
+            self._entity = entity
+            self._hass = hass
+            self._hass.listen_state(self._listener, entity=entity, attributes='all')
             self._listeners = []
 
 
@@ -73,27 +72,27 @@ class Entities(Base):
 
         @property
         def state(self):
-            return self.hass.get_state(self.entity)
+            return self._hass.get_state(self._entity)
         @state.setter
         def state(self, state):
-            self.hass.set_state(self.entity, state=state)
+            self._hass.set_state(self._entity, state=state)
 
-        @property
-        def attributes(self):
-            return self.hass.get_state(self.entity, attribute='all')['attributes']
-
-        def __getitem__(self, key):
-            if key == 'state':
-                return self.state
-            else:
-                return self.attributes.get(key, None)
-        def __setitem__(self, key, value):
-            if key == 'state':
-                self.state = value
-            else:
-                d = self.attributes
-                d[key] = value
-                self.hass.set_state(self.entity, attributes=d)
+        def __getattr__(self, key):
+            return self._hass.get_state(self._entity, attribute='all')['attributes'].get(key, None)
+        def __setattr__(self, key, value):
+            if key.startswith('_'):
+                self.__dict__[key] = value
+                return
+            d = self._hass.get_state(self._entity, attribute='all')['attributes']
+            d[key] = value
+            self._hass.set_state(self._entity, attributes=d)
+        def __delattr__(self, key):
+            if key.startswith('_'):
+                del self.__dict__[key]
+                return
+            d = self._hass.get_state(self._entity, attribute='all')['attributes']
+            d[key] = ''
+            self._hass.set_state(self._entity, attributes=d)
 
     class LightEntity(Entities.Entity):
         def __init__(self, hass, entity):
@@ -105,9 +104,9 @@ class Entities(Base):
         @state.setter
         def state(self, state):
             if state == 'on':
-                self.hass.call_service('light/turn_on', entity_id = self.entity)
+                self._hass.call_service('light/turn_on', entity_id = self._entity)
             elif state == 'off':
-                self.hass.call_service('light/turn_off', entity_id = self.entity)
+                self._hass.call_service('light/turn_off', entity_id = self._entity)
             else:
                 return
             super(Entities.LightEntity, self.__class__).state.fset(self, state)
