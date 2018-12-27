@@ -1,6 +1,6 @@
 import base
 
-class HelloWorld(base.Timers):
+class HelloWorld(base.Entities, base.Timers):
 
     def initialize(self):
         super().initialize()
@@ -13,7 +13,11 @@ class HelloWorld(base.Timers):
         self.run_in(self.after_time2, 7)
         self.cancel_timer('test2')
 
+        self.register_entity('taklampa', 'light.kontoret')
+
     def after_time(self, kwargs):
         self.log("Running function")
+        self.e['taklampa']['icon'] = "mdi:lamp"
     def after_time2(self, kwargs):
         self.log("Running function2")
+        self.e['taklampa']['icon'] = "mdi:lightbulb"
