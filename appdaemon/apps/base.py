@@ -53,19 +53,24 @@ class Entities(Base):
 
         self.e = {}
 
-    def register_entity(self, name, entity):
+    def register_entity(self, name, entity, managed=False, default=None, attributes=None):
         domain, _ = entity.split('.')
         controller = {
                 'light': Entities.LightEntity,
                 }.get(domain, Entities.Entity)
-        self.e[name] = controller(self, entity)
+        self.e[name] = controller(self, entity, managed, default, attributes)
 
     class Entity:
-        def __init__(self, hass, entity):
+        def __init__(self, hass, entity, managed = False, default = None, attributes = None):
             self._entity = entity
             self._hass = hass
             self._hass.listen_state(self._listener, entity=entity, attributes='all')
             self._listeners = []
+            if managed:
+                if default:
+                    self.state = default
+                for k,v in attributes.items():
+                    setattr(self, k, v)
 
         def listen(self, callback, kwarg=None):
             """ Listen to changes to entity state """
@@ -82,22 +87,20 @@ class Entities(Base):
             for l in self._listeners:
                 l['callback'](l['kwarg'])
 
-        @property
-        def state(self):
-            return self._hass.get_state(self._entity)
-        @state.setter
-        def state(self, state):
-            self._hass.set_state(self._entity, state=state)
-
         def __getattr__(self, key):
+            if key == 'state':
+                return self._hass.get_state(self._entity)
             return self._hass.get_state(self._entity,
-                    attribute='all')['attributes'].get(key, None)
+                    attribute=key)
         def __setattr__(self, key, value):
             if key.startswith('_'):
                 self.__dict__[key] = value
                 return
+            if key == 'state':
+                return self._hass.set_state(self._entity, state=value)
             attr = self._hass.get_state(self._entity,
-                    attribute='all')['attributes']
+                    attribute='all')
+            attr = attr.get('attributes', {}) if attr else {}
             attr[key] = value
             self._hass.set_state(self._entity, attributes=attr)
         def __delattr__(self, key):
@@ -105,7 +108,7 @@ class Entities(Base):
                 del self.__dict__[key]
                 return
             attr = self._hass.get_state(self._entity,
-                    attribute='all')['attributes']
+                    attribute='all').get('attributes', {})
             attr[key] = ''
             self._hass.set_state(self._entity, attributes=attr)
 
