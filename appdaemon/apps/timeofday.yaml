@@ -1,0 +1,63 @@
+timeofday:
+  module: timeofday
+  class: TimeOfDay
+  global_dependencies:
+    - base
+
+  morning:
+    name: input_datetime.tod_morning
+    default: "05:45"
+    has_date: False
+    has_time: True
+    friendly_name: Morning
+    icon: mdi:weather-sunset-up
+  day:
+    name: input_datetime.tod_day
+    default: "08:00"
+    has_date: False
+    has_time: True
+    friendly_name: Dag
+    icon: mdi:weather-sunny
+  evening:
+    name: input_datetime.tod_evening
+    default: "19:00"
+    has_date: False
+    has_time: True
+    friendly_name: Kväll
+    icon: mdi:weather-sunset-down
+  night:
+    name: input_datetime.tod_night
+    default: "23:00"
+    has_date: False
+    has_time: True
+    friendly_name: Natt
+    icon: mdi:minus
+  sunrise:
+    name: input_number.tod_sunrise_offset
+    default: 30
+    min: -120
+    max: 120
+    step: 5
+    mode: slider
+  sunset:
+    name: input_number.tod_sunset_offset
+    default: -30
+    min: -120
+    max: 120
+    step: 5
+    mode: slider
+
+  tod:
+    name: input_select.tod
+    default: morning
+    friendly_name: Time of Day
+    options:
+      - morning
+      - day
+      - evening
+      - night
+  dark:
+    name: switch.tod_dark
+    default: on
+    friendly_name: Sun Down
+    icon: mdi:weather-night

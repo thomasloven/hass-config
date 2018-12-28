@@ -1,0 +1,26 @@
+homeassistant:
+  customize:
+    input_number.appd_dummy:
+      hidden: true
+    input_datetime.appd_dummy:
+      hidden: true
+    input_select.appd_dummy:
+      hidden: true
+    input_boolean.appd_dummy:
+      hidden: true
+    input_text.appd_dummy:
+      hidden: true
+
+input_number:
+  appd_dummy:
+    min: 0
+    max: 10
+input_datetime:
+  appd_dummy: {}
+input_select:
+  appd_dummy:
+    options: [1]
+input_boolean:
+  appd_dummy:
+input_text:
+  appd_dummy: {}
