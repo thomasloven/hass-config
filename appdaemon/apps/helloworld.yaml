@@ -1,9 +1,11 @@
 global_modules:
   - base
+  - entities
 
 hello_world:
   global_dependencies:
     - base
+    - entities
   module: hello
   class: HelloWorld
 
