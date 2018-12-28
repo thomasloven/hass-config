@@ -16,7 +16,9 @@ input_number:
     min: 0
     max: 10
 input_datetime:
-  appd_dummy: {}
+  appd_dummy:
+    has_date: False
+    has_time: True
 input_select:
   appd_dummy:
     options: [1]

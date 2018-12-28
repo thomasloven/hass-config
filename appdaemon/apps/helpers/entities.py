@@ -71,13 +71,11 @@ class Entity:
         self._attributes = d['attributes']
 
     def push(self):
-        self._hass.set_state(self._entity, state=self._state, attributes=self._attributes)
         if self._state != self._laststate:
-            old = self._laststate
-            new = self._state
-            self._laststate = new
-            self.set_state(old, new)
-            self._callback(old, new)
+            self.set_state(self._laststate, self._state)
+            self._laststate = self._state
+            self._callback(self._laststate, self._state)
+        self._hass.set_state(self._entity, state=self._state, attributes=self._attributes)
 
     def set_state(self, old, new):
         pass
@@ -113,6 +111,12 @@ class LightEntity(Entity):
 
 
 class SwitchEntity(Entity):
+
+    def set_state(self, old, new):
+        if new == True:
+            self._state = "on"
+        if new == False:
+            self._state = "off"
 
     def service_callback(self, data):
         if data['service'] == 'turn_on':

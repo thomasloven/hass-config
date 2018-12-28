@@ -25,16 +25,16 @@ class Timers(base.Base):
     def cancel_timer(self, name, *args, **kwargs):
         if type(name) is str:
             if name in self._timers:
-                return super().cancel_timer(self._timers[name])
+                return super(Timers, self).cancel_timer(self._timers[name])
         else:
-            return super().cancel_timer(*args, **kwargs)
+            return super(Timers, self).cancel_timer(*args, **kwargs)
 
     def _override(self, f):
         setattr(self, f'_{f}', getattr(self, f))
         def fn(name, *args, **kwargs):
             if type(name) is str:
                 if name in self._timers:
-                    super().cancel_timer(self._timers[name])
+                    super(Timers, self).cancel_timer(self._timers[name])
                 self._timers[name] = getattr(self, f'_{f}')(*args, **kwargs)
                 return self._timers[name]
             else:
