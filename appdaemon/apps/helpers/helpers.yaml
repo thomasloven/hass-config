@@ -1,0 +1,4 @@
+global_modules:
+  - base
+  - entities
+  - timers

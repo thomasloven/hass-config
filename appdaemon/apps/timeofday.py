@@ -1,5 +1,6 @@
 import base
-class TimeOfDay(base.Entities):
+import entities
+class TimeOfDay(entities.Entities):
     def initialize(self):
         super().initialize()
 
@@ -18,5 +19,5 @@ class TimeOfDay(base.Entities):
         self.e['sunrise'].listen(self.input_listener, {'changed': "sunrise"})
 
 
-    def input_listener(self, kwargs):
+    def input_listener(self, old, new, kwargs):
         self.log(kwargs)
