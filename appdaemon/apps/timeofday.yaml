@@ -3,6 +3,8 @@ timeofday:
   class: TimeOfDay
   global_dependencies:
     - base
+    - entities
+    - timers
 
   morning:
     name: input_datetime.tod_morning

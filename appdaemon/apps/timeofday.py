@@ -33,11 +33,17 @@ class TimeOfDay(Timers, Entities):
 
         self.update(None, None, {'trigger': 'init'})
 
-    def update(self, old, new, kwarg):
+    def update(self, old=None, new=None, kwarg=None):
 
+        if kwarg is None:
+            kwarg = old
         trigger = kwarg.get('trigger', None)
 
-        if kwarg.get('entity', None) in ['tod', 'dark']:
+        if kwarg.get('entity', None) == 'tod':
+            self.fire_event('TOD_TOD', old = old, new = new)
+            return
+        if kwarg.get('entity', None) == 'dark':
+            self.fire_event('TOD_DARK', old = old, new = new)
             return
 
         self.log(f"TOD - updated by {trigger}")
@@ -101,3 +107,10 @@ class TimeOfDay(Timers, Entities):
         self.e['dark'].push()
         self.e['tod'].state = tod
         self.e['tod'].push()
+
+    @property
+    def tod(self):
+        return self.e['tod'].state
+    @property
+    def dark(self):
+        return self.e['dark'].state
