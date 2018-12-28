@@ -1,0 +1,23 @@
+outside_lights:
+  module: timed_lights
+  class: OutsideLights
+  global_dependencies:
+    - entities
+  dependencies:
+    - timeofday
+  lights:
+    - light.ute_framsidan
+
+
+decorative_lights:
+  module: timed_lights
+  class: DecorativeLights
+  global_dependencies:
+    - entities
+  dependencies:
+    - timeofday
+  lights:
+    - light.deko_vardagsrum
+    - light.skotbord
+    - light.trappbelysning
+    - light.kontor_fonster
