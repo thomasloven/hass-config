@@ -57,6 +57,8 @@ class Entities(Base):
         domain, _ = entity.split('.')
         controller = {
                 'light': Entities.LightEntity,
+                'input_datetime': Entities.InputDateTimeEntity,
+                'input_number': Entities.InputNumberEntity,
                 }.get(domain, Entities.Entity)
         self.e[name] = controller(self, entity, managed, default, attributes)
 
@@ -69,8 +71,7 @@ class Entities(Base):
             if managed:
                 if default:
                     self.state = default
-                for k,v in attributes.items():
-                    setattr(self, k, v)
+                self.update(attributes)
 
         def listen(self, callback, kwarg=None):
             """ Listen to changes to entity state """
@@ -116,6 +117,11 @@ class Entities(Base):
             attr[key] = ''
             self._hass.set_state(self._entity, attributes=attr)
 
+        def update(self, new):
+            attr = self._hass.get_state(self._entity, attribute='all').get('attributes', {})
+            attr.update(new)
+            self._hass.set_state(self._entity, attributes=attr)
+
     class LightEntity(Entities.Entity):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
@@ -129,3 +135,34 @@ class Entities(Base):
                         self._entity)
             else:
                 return
+
+    class InputNumberEntity(Entities.Entity):
+        def __init__(self, hass, entity, managed = False, default = None, attributes = None):
+            super().__init__(hass, entity, managed, default, attributes)
+            if managed:
+                hass.listen_event(self.service_callback, event = 'call_service')
+
+        def service_callback(self, event, data, kwargs):
+            if data['service_data'].get('entity_id', '') == self._entity and data['service'] == 'set_value':
+                self._hass.log("Value changed!")
+
+
+    class InputDateTimeEntity(Entities.Entity):
+        def __init__(self, hass, entity, managed = False, default = None, attributes = None):
+            super().__init__(hass, entity, managed, default, attributes)
+            if managed:
+                hass.listen_event(self.service_callback, event = 'call_service')
+
+        def service_callback(self, event, data, kwargs):
+            if data['service_data'].get('entity_id', '') == self._entity and data['service'] == 'set_datetime':
+                self._hass.log("Datetime changed!")
+
+        def set_state(self, state):
+            time = state.split(':')
+            time += ['00'] * (3 - len(time))
+            self._hass.set_state(self._entity, state=':'.join(time))
+            self.update({
+                'hour': int(time[0], base=10),
+                'minute': int(time[1], base=10),
+                'second': int(time[2], base=10),
+                })
