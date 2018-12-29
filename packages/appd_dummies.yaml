@@ -25,4 +25,6 @@ input_select:
 input_boolean:
   appd_dummy:
 input_text:
-  appd_dummy: {}
+  appd_dummy:
+    name: dummy
+    initial: dummy
