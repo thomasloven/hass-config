@@ -9,9 +9,9 @@ class TimeOfDay(Timers, Entities):
     def initialize(self):
         super().initialize()
 
-        self.run_in(self.setup_inputs, 1)
+        self.run_in(self._setup_inputs, 1)
 
-    def setup_inputs(self, kwargs):
+    def _setup_inputs(self, kwargs):
         inputs = [
                 'morning',
                 'day',
@@ -29,16 +29,17 @@ class TimeOfDay(Timers, Entities):
             del e['name']
             del e['default']
             self.register_entity(i, name, True, default, e)
-            self.e[i].listen(self.update, {'trigger': 'setting', 'entity': i})
+            self.e[i].listen(self._update, {'trigger': 'setting', 'entity': i})
 
-        self.update(None, None, {'trigger': 'init'})
+        self._update(None, None, {'trigger': 'init'})
 
-    def update(self, old=None, new=None, kwarg=None):
+    def _update(self, old=None, new=None, kwarg=None):
 
         if kwarg is None:
             kwarg = old
         trigger = kwarg.get('trigger', None)
 
+        # Tell listeners if Time Of Day or Dark has changed
         if kwarg.get('entity', None) == 'tod':
             self.fire_event('TOD_TOD', old = old, new = new)
             return
@@ -53,7 +54,7 @@ class TimeOfDay(Timers, Entities):
             if not trigger == t:
                 self.run_once(
                         t,
-                        self.update,
+                        self._update,
                         self.parse_time(self.e[t].state),
                         trigger=t
                         )
@@ -65,7 +66,7 @@ class TimeOfDay(Timers, Entities):
             sunrise = (self.sunrise() + sunrise).time()
             self.run_once(
                     'sunrise',
-                    self.update,
+                    self._update,
                     sunrise,
                     trigger='sunrise'
                     )
@@ -75,7 +76,7 @@ class TimeOfDay(Timers, Entities):
             sunset = (self.sunset() + sunset).time()
             self.run_once(
                     'sunset',
-                    self.update,
+                    self._update,
                     sunset,
                     trigger='sunset'
                     )
