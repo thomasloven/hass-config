@@ -104,10 +104,12 @@ class Entity:
 class LightEntity(Entity):
 
     def set_state(self, old, new):
-        if new == "on":
+        if new == "on" or new == True:
             self._hass.call_service("light/turn_on", entity_id = self._entity)
-        elif new == "off":
+            self._state = "on"
+        elif new == "off" or new == False:
             self._hass.call_service("light/turn_off", entity_id = self._entity)
+            self._state = "off"
 
 
 class SwitchEntity(Entity):

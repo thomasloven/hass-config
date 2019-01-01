@@ -7,7 +7,6 @@ class OutsideLights(Entities):
             self.register_entity(l, l)
 
         self.listen_event(self.update, 'TOD_TOD')
-        self.listen_event(self.update, 'TOD_DARK')
         self.run_in(lambda *_: self.update(None, None, None), 2)
 
     def update(self, event, data, kwarg):

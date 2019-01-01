@@ -11,6 +11,8 @@ class TimeOfDay(Timers, Entities):
 
         self.run_in(self._setup_inputs, 1)
 
+        self.updating = False
+
     def _setup_inputs(self, kwargs):
         inputs = [
                 'morning',
@@ -29,23 +31,19 @@ class TimeOfDay(Timers, Entities):
             del e['name']
             del e['default']
             self.register_entity(i, name, True, default, e)
+        for i in inputs:
             self.e[i].listen(self._update, {'trigger': 'setting', 'entity': i})
 
         self._update(None, None, {'trigger': 'init'})
 
     def _update(self, old=None, new=None, kwarg=None):
 
+        if self.updating:
+            return
+
         if kwarg is None:
             kwarg = old
         trigger = kwarg.get('trigger', None)
-
-        # Tell listeners if Time Of Day or Dark has changed
-        if kwarg.get('entity', None) == 'tod':
-            self.fire_event('TOD_TOD', old = old, new = new)
-            return
-        if kwarg.get('entity', None) == 'dark':
-            self.fire_event('TOD_DARK', old = old, new = new)
-            return
 
         self.log(f"TOD - updated by {trigger}")
 
@@ -60,20 +58,20 @@ class TimeOfDay(Timers, Entities):
                         )
 
         # Set up triggers for sunrise and sunset
+        sunrise = float(self.e['sunrise'].state)
+        sunrise = timedelta(minutes=sunrise)
+        sunrise = (self.sunrise() + sunrise).time()
         if trigger != 'sunrise':
-            sunrise = float(self.e['sunrise'].state)
-            sunrise = timedelta(minutes=sunrise)
-            sunrise = (self.sunrise() + sunrise).time()
             self.run_once(
                     'sunrise',
                     self._update,
                     sunrise,
                     trigger='sunrise'
                     )
+        sunset = float(self.e['sunset'].state)
+        sunset = timedelta(minutes=sunset)
+        sunset = (self.sunset() + sunset).time()
         if trigger != 'sunset':
-            sunset = float(self.e['sunset'].state)
-            sunset = timedelta(minutes=sunset)
-            sunset = (self.sunset() + sunset).time()
             self.run_once(
                     'sunset',
                     self._update,
@@ -104,14 +102,23 @@ class TimeOfDay(Timers, Entities):
         self.log(f"TOD - Time of day is {tod}, sun {'has set' if dark else 'is up'}")
 
         # Update outputs
+        self.updating = True
         self.e['dark'].state = dark
         self.e['dark'].push()
         self.e['tod'].state = tod
         self.e['tod'].push()
+        self.e['sunrise'].attr['time'] = sunrise.strftime("%H:%M:%S")
+        self.e['sunrise'].push()
+        self.e['sunset'].attr['time'] = sunset.strftime("%H:%M:%S")
+        self.e['sunset'].push()
+        self.updating = False
+
+        # Tell listeners if Time Of Day or Dark has changed
+        self.fire_event('TOD_TOD', old = old, new = new)
 
     @property
     def tod(self):
         return self.e['tod'].state
     @property
     def dark(self):
-        return self.e['dark'].state
+        return self.e['dark'].state == "on"
