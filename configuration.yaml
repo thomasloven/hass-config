@@ -14,3 +14,7 @@ discovery:
 history:
 logbook:
 config:
+
+http:
+  base_url: !secret base_url
+  api_password: !secret api_password
