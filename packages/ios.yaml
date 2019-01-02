@@ -1,0 +1,28 @@
+ios:
+  push:
+    categories:
+      - name: YesNo
+        identifier: yesno
+        actions:
+          - identifier: 'YES'
+            title: 'Ja'
+          - identifier: 'NO'
+            title: 'Nej'
+      - name: YesLater
+        identifier: yeslater
+        actions:
+          - identifier: 'YES'
+            title: 'OK'
+          - identifier: 'LATER'
+            title: 'Vänta'
+      - name: YesLaterNo
+        identifier: yeslaterno
+        actions:
+          - identifier: 'YES'
+            title: 'Ja'
+          - identifier: 'LATER'
+            title: 'Vänta'
+          - identifier: 'NO'
+            title: 'Nej'
+notify:
+  - platform: ios

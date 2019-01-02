@@ -1,0 +1,30 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: 'reminders'
+
+automation:
+  - alias: REM - Kaffet är klart
+    trigger:
+      platform: state
+      entity_id: switch.kaffebryggare
+      to: 'on'
+      for:
+        minutes: 5
+    action:
+      - service: notify.ios_thomas_iphone
+        data:
+          title: "Fikadax!"
+          message: "Kaffet är färdigt!"
+  - alias: REM - Stäng av kaffebryggaren
+    trigger:
+      platform: state
+      entity_id: switch.kaffebryggare
+      to: 'on'
+      for:
+        minutes: 15
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.kaffebryggare
