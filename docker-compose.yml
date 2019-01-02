@@ -1,0 +1,79 @@
+version: '2.0'
+services:
+  mysensors:
+    container_name: MySensors
+    image: akshmakov/serialport-server:amd64
+    restart: always
+    ports:
+      - "2000:2000"
+    devices:
+      - "/dev/mysensors:/dev/ttyUSB0"
+    environment:
+      DEVICE: /dev/ttyUSB0
+      BAUDRATE: 115200
+
+  rflink:
+    container_name: RFLink
+    image: akshmakov/serialport-server:amd64
+    restart: always
+    ports:
+      - "2001:2000"
+    devices:
+      - "/dev/rflink:/dev/ttyUSB0"
+    environment:
+      DEVICE: /dev/ttyUSB0
+      BAUDRATE: 57600
+
+  deconz:
+    container_name: deCONZ
+    image: marthoc/deconz:amd64-2.05.52
+    restart: always
+    ports:
+      - "8082:8082"
+      - "10443:10443"
+    devices:
+      - "/dev/conbee:/dev/ttyUSB0"
+    volumes:
+      - /root/docker/deconz:/root/.local/share/dresden-elektronik/deCONZ
+    environment:
+      DECONZ_WEB_PORT: 8082
+      DECONZ_WS_PORT: 10443
+
+  mosquitto:
+    container_name: Mosquitto
+    image: eclipse-mosquitto:latest
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - /root/docker/mosquitto/data:/mosquitto/data
+      - /root/docker/mosquitto/log:/mosquitto/log
+
+  homeassistant:
+    container_name: HomeAssistant
+    image: homeassistant/home-assistant:latest
+    restart: always
+    network_mode: host
+    ports:
+      - "8123:8123"
+    volumes:
+      - /root/docker/hass/home-assistant:/config
+    environment:
+      TZ: Europe/Stockholm
+
+  appdaemon:
+    container_name: AppDaemon
+    image: acockburn/appdaemon
+    restart: always
+    ports:
+      - "5050:5050"
+    volumes:
+      - /root/docker/hass/home-assistant/appdaemon:/conf
+      - /root/docker/appdaemon/certs:/certs
+    environment:
+      TZ: Europe/Stockholm
+      # The following values ar overridden in docker-compose.override.yml
+      HA_URL: host-ip:8123
+      DASH_URL: host-ip:5050
+      TOKEN: secret_token

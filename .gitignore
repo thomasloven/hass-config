@@ -2,6 +2,7 @@
 /*/
 !.gitignore
 !configuration.yaml
+!docker-compose.yml
 !packages/
 **/__pycache__/
 !/appdaemon/
