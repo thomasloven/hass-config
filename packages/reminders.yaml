@@ -6,6 +6,7 @@ homeassistant:
 
 automation:
   - alias: REM - Kaffet är klart
+    initial_state: True
     trigger:
       platform: state
       entity_id: switch.kaffebryggare
@@ -18,6 +19,7 @@ automation:
           title: "Fikadax!"
           message: "Kaffet är färdigt!"
   - alias: REM - Stäng av kaffebryggaren
+    initial_state: True
     trigger:
       platform: state
       entity_id: switch.kaffebryggare
