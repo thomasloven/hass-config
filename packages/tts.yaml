@@ -1,0 +1,4 @@
+tts:
+  - platform: google
+    language: 'sv'
+    base_url: !secret tts_base_url
