@@ -1,0 +1,26 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: lights
+
+  light.sovrum:
+    <<: *common
+
+  light.takfläkt:
+    <<: *common
+
+light:
+  - platform: group
+    name: Sovrum
+    entities:
+      - light.sovrum1
+      - light.sovrum2
+      - light.sovrum3
+  - platform: group
+    name: Takfläkt
+    entities:
+      - light.takflakt_1
+      - light.takflakt_2
+      - light.takflakt_3
+      - light.takflakt_4
