@@ -1,4 +1,30 @@
+import os
+import json
 import base
+
+class EntityManager(base.Base):
+    ENTITY_FILE = 'entities.json'
+
+    def initialize(self):
+        statedir = os.path.dirname(os.path.realpath(__file__))
+        self.statefile = os.path.join(statedir, self.ENTITY_FILE)
+
+        if not os.path.exists(self.statefile):
+            os.mknod(self.statefile)
+            self.db = {}
+        else:
+            with open(self.statefile) as f:
+                self.db = json.load(f)
+        self.get = self.db.get
+
+    def terminate(self):
+        with open(self.statefile, 'w') as f:
+            json.dump(self.db, f)
+
+    def __getitem__(self, key):
+        return self.db.get(key, None)
+    def __setitem__(self, key, value):
+        self.db[key] = value
 
 class Entities(base.Base):
 
@@ -25,7 +51,8 @@ class Entity:
         self._hass = hass
         self._entity = entity
         self._managed = managed
-        self._state = state
+        self.manager = hass.get_app('entity_manager') if managed else {}
+        self._state = self.manager.get(entity, state)
         self._laststate = None
         self._attributes = attributes
         self._listeners = []
@@ -55,6 +82,7 @@ class Entity:
         self._attributes = new['attributes']
         old, new = self._laststate, self._state
         if old != new:
+            self.manager[self._entity] = self._state
             self._laststate = new
             self._callback(old, new)
 
@@ -67,6 +95,7 @@ class Entity:
     def pull(self):
         d = self._hass.get_state(self._entity, attribute='all')
         self._state = d['state']
+        self.manager[self._entity] = self._state
         self._laststate = self._state
         self._attributes = d['attributes']
 
@@ -76,6 +105,7 @@ class Entity:
             self._laststate = self._state
             self._callback(self._laststate, self._state)
         self._hass.set_state(self._entity, state=self._state, attributes=self._attributes)
+        self.manager[self._entity] = self._state
 
     def set_state(self, old, new):
         pass

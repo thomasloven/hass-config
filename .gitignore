@@ -8,3 +8,4 @@
 !/appdaemon/
 /appdaemon/*
 !/appdaemon/apps
+*.json

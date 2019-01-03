@@ -5,6 +5,7 @@ outside_lights:
     - entities
   dependencies:
     - timeofday
+    - entity_manager
   lights:
     - light.ute_framsidan
 
@@ -16,6 +17,7 @@ decorative_lights:
     - entities
   dependencies:
     - timeofday
+    - entity_manager
   lights:
     - light.deko_vardagsrum
     - light.skotbord
