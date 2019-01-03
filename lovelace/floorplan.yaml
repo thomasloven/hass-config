@@ -1,0 +1,94 @@
+type: picture-elements
+image: !file /local/images/Bottenvåning.png
+elements:
+
+  {% set lamp = """
+    type: state-icon
+    tap_action: { action: toggle }
+    """ %}
+  {% set dimlamp = """
+    type: state-icon
+    tap_action: { action: toggle }
+    hold_action: { action: more-info }
+    """ %}
+
+  # Kontoret
+  - entity: light.taklampa_kontoret
+    style: { left: 82%, top: 68% }
+    {{ dimlamp }}
+  - entity: light.kontor_fonster
+    style: { left: 83%, top: 87% }
+    {{ lamp }}
+  - entity: light.skrivbordslampa_1
+    style: { left: 88%, top: 58% }
+    {{ dimlamp }}
+
+  # Lilla hallen
+  - entity: light.lilla_hallen
+    style: { left: 72%, top: 53% }
+    {{ dimlamp }}
+
+  # Stora hallen
+  - entity: light.stora_hallen
+    style: { left: 43%, top: 70% }
+    {{ dimlamp }}
+  - entity: light.trappbelysning
+    style: { left: 49%, top: 61% }
+    {{ lamp }}
+
+ # Köket
+  - entity: light.taklampa_koket
+    style: { left: 32%, top: 76% }
+    {{ dimlamp }}
+  - type: state-icon
+    entity: switch.kaffebryggare
+    tap_action: { action: toggle }
+    style: { left: 16%, top: 84% }
+
+# Vardagsrummet
+  - entity: light.vardagsrum
+    style: { left: 60%, top: 30% }
+    {{ dimlamp }}
+  - entity: light.takflakt
+    style: { left: 43%, top: 30% }
+    {{ dimlamp }}
+  - entity: light.bokhylla
+    style: { left: 55%, top: 45% }
+    {{ lamp }}
+  - type: state-label
+    entity: sensor.vardagsrum_0
+    style: { left: 40%, top: 36% }
+
+# Sovrum
+  - entity: light.sovrum
+    style: { left: 81%, top: 30% }
+    {{ dimlamp }}
+
+# Tvättstuga
+  - entity: light.skotbord
+    style: { left: 21%, top: 15% }
+    {{ lamp }}
+
+# Utomhus
+  - entity: light.ute_framsidan
+    style: { left: 44%, top: 94% }
+    {{ lamp }}
+  - entity: light.ute_framsidan
+    style: { left: 16%, top: 94% }
+    {{ lamp }}
+  - entity: light.ute_framsidan
+    style: { left: 60%, top: 94% }
+    {{ lamp }}
+  - entity: light.ute_framsidan
+    style: { left: 75%, top: 94% }
+    {{ lamp }}
+  - entity: light.ute_framsidan
+    style: { left: 95%, top: 30% }
+    {{ lamp }}
+  - entity: light.ute_framsidan
+    style: { left: 95%, top: 70% }
+    {{ lamp }}
+
+  - type: state-label
+    entity: sensor.elmatare_0
+    style: { left: 5%, top: 55% }

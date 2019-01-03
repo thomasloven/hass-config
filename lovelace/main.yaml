@@ -1,5 +1,11 @@
 title: Åvägen
 views:
-  - title: Hemma
-    cards: []
-
+  - title: Hemma2
+    cards:
+      - type: entity-button
+        entity: light.taklampa_kontoret
+        name: Reload config
+        tap_action:
+          action: call-service
+          service: shell_command.lovelace_gen
+      - !include floorplan.yaml
