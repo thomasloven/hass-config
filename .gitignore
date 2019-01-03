@@ -9,3 +9,5 @@
 /appdaemon/*
 !/appdaemon/apps
 *.json
+
+!/lovelace/

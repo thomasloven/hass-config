@@ -1,0 +1,6 @@
+lovelace:
+  mode: yaml
+
+shell_command:
+  lovelace_gen: 'cd /config && python /config/www/lovelace/homeassistant-lovelace-gen/lovelace-gen.py'
+
