@@ -1,0 +1,81 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      coffee_switch: &cfe_switch switch.kaffebryggare
+      common: &common
+        package: coffeemaker
+
+    input_datetime.cfe_on:
+      <<: *common
+      friendly_name: Tid
+    input_number.cfe_off:
+      <<: *common
+      friendly_name: Tid (min)
+    input_boolean.cfe_on:
+      <<: *common
+      friendly_name: Morgonkaffe
+    input_boolean.cfe_off:
+      <<: *common
+      friendly_name: Slå av automatiskt
+    script.cfe_off:
+      <<: *common
+    automation.coffee__timer_on:
+      <<: *common
+    automation.coffee__auto_off:
+      <<: *common
+
+input_datetime:
+  cfe_on:
+    has_date: false
+    has_time: true
+    initial: "06:00"
+input_number:
+  cfe_off:
+    initial: 15
+    min: 5
+    max: 60
+    step: 5
+input_boolean:
+  cfe_on:
+    initial: off
+  cfe_off:
+    initial: on
+
+script:
+  cfe_off:
+    sequence:
+      - delay: 00:{{ states('input_number.cfe_off') | int}}:00
+      - service: homeassistant.turn_off
+        data:
+          entity_id: *cfe_switch
+
+automation:
+  - alias: Coffee - Timer On
+    trigger:
+      - platform: template
+        value_template: >
+          {{ states('sensor.time') == states('input_datetime.cfe_on')[:5] }}
+    condition:
+      condition: state
+      entity_id: input_boolean.cfe_on
+      state: 'on'
+    action:
+      - service: homeassistant.turn_off
+        data:
+          entity_id: input_boolean.cfe_on
+      - service: homeassistant.turn_on
+        data:
+          entity_id: *cfe_switch
+
+  - alias: Coffee - Auto Off
+    trigger:
+      - platform: state
+        entity_id: *cfe_switch
+        to: 'on'
+    condition:
+      condition: state
+      entity_id: input_boolean.cfe_off
+      state: 'on'
+    action:
+      - service: script.cfe_off
+

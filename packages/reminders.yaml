@@ -18,15 +18,3 @@ automation:
         data:
           title: "Fikadax!"
           message: "Kaffet är färdigt!"
-  - alias: REM - Stäng av kaffebryggaren
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: switch.kaffebryggare
-      to: 'on'
-      for:
-        minutes: 15
-    action:
-      - service: switch.turn_off
-        data:
-          entity_id: switch.kaffebryggare
