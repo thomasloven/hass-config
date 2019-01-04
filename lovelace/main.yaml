@@ -1,4 +1,11 @@
 title: Åvägen
+resources:
+  - url: !file /local/lovelace-card-tools/card-tools.js
+    type: js
+  - url: !file /local/lovelace-fold-entity-row/fold-entity-row.js
+    type: js
+  - url: !file /local/lovelace-time-input-row/time-input-row.js
+    type: js
 views:
   - title: Hemma2
     cards:
@@ -9,3 +16,4 @@ views:
           action: call-service
           service: shell_command.lovelace_gen
       - !include floorplan.yaml
+      - !include coffee_card.yaml

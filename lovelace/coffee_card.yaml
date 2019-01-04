@@ -1,0 +1,19 @@
+type: entities
+entities:
+  - type: custom:hui-picture-entity-card
+    entity: switch.kaffebryggare
+    image: !file /local/images/moccamaster.jpg
+    show_state: false
+    show_name: false
+    tap_action: { action: toggle }
+  - type: custom:fold-entity-row
+    head:
+      entity: switch.kaffebryggare
+      icon: mdi:coffee
+    items:
+      - input_boolean.cfe_on
+      - type: custom:time-input-row
+        entity: input_datetime.cfe_on
+      - type: section
+      - input_boolean.cfe_off
+      - input_number.cfe_off
