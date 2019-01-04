@@ -4,11 +4,11 @@ homeassistant:
       common: &common
         package: lights
 
-  light.sovrum:
-    <<: *common
+    light.sovrum:
+      <<: *common
 
-  light.takfläkt:
-    <<: *common
+    light.takfläkt:
+      <<: *common
 
 light:
   - platform: group

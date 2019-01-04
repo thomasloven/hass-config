@@ -4,7 +4,6 @@ homeassistant:
       common: &common
         package: "rflink"
 
-  customize_glob:
     light.ute_framsidan:
       <<: *common
     light.trappbelysning:
