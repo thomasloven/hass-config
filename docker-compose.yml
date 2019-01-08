@@ -26,7 +26,7 @@ services:
 
   deconz:
     container_name: deCONZ
-    image: marthoc/deconz:amd64-2.05.52
+    image: marthoc/deconz:amd64-2.05.54
     restart: always
     ports:
       - "8082:8082"
