@@ -1,3 +1,5 @@
+{% set dev_card="- !include dev_card.yaml" %}
+
 title: Åvägen
 resources:
   - url: !file /local/lovelace-card-tools/card-tools.js
@@ -7,13 +9,16 @@ resources:
   - url: !file /local/lovelace-time-input-row/time-input-row.js
     type: js
 views:
-  - title: Hemma2
+  - title: Hemma
     cards:
-      - type: entity-button
-        entity: light.taklampa_kontoret
-        name: Reload config
-        tap_action:
-          action: call-service
-          service: shell_command.lovelace_gen
       - !include floorplan.yaml
       - !include coffee_card.yaml
+      {{ dev_card }}
+
+  - title: Floorplan
+    panel: true
+    cards:
+      - type: vertical-stack
+        cards:
+        - !include floorplan.yaml
+        {{ dev_card }}

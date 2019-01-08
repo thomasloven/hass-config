@@ -1,0 +1,16 @@
+type: glance
+title: Dev
+show_state: false
+entities:
+  - entity: sensor.time
+    name: Reload config
+    icon: mdi:refresh
+    tap_action:
+      action: call-service
+      service: shell_command.lovelace_gen
+  - entity: sensor.time
+    name: States
+    icon: mdi:tune
+    tap_action:
+      action: navigate
+      navigation_path: /states
