@@ -52,7 +52,7 @@ services:
 
   homeassistant:
     container_name: HomeAssistant
-    image: homeassistant/home-assistant:latest
+    image: homeassistant/home-assistant:0.85.0
     restart: always
     network_mode: host
     ports:
