@@ -51,6 +51,7 @@ script:
 
 automation:
   - alias: Coffee - Timer On
+    initial_state: True
     trigger:
       - platform: template
         value_template: >
@@ -68,6 +69,7 @@ automation:
           entity_id: *cfe_switch
 
   - alias: Coffee - Auto Off
+    initial_state: True
     trigger:
       - platform: state
         entity_id: *cfe_switch

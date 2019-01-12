@@ -5,6 +5,7 @@ binary_sensor:
 
 automation:
   - alias: Desk lamp follows computer
+    initial_state: True
     trigger:
       - platform: state
         entity_id: binary_sensor.arrakis
