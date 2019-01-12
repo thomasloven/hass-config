@@ -2,13 +2,29 @@ homeassistant:
   customize:
     package.node_anchors:
       common: &common
-        package: lights
+        package: "lights"
+      grouped: &grouped
+        hidden: true
 
     light.sovrum:
       <<: *common
+    light.sovrum1:
+      <<: *grouped
+    light.sovrum2:
+      <<: *grouped
+    light.sovrum3:
+      <<: *grouped
 
     light.takfläkt:
       <<: *common
+    light.takflakt_1:
+      <<: *grouped
+    light.takflakt_2:
+      <<: *grouped
+    light.takflakt_3:
+      <<: *grouped
+    light.takflakt_4:
+      <<: *grouped
 
 light:
   - platform: group

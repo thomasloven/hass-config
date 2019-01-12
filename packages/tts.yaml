@@ -1,4 +1,6 @@
 tts:
   - platform: google
     language: 'sv'
+    # Use local address for tts in order to work with chromecasts
+    # http://<internal.ip.of.hass>:8123
     base_url: !secret tts_base_url

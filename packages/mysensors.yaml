@@ -34,7 +34,6 @@ mysensors:
   version: 2.0
 
 # The power meter has two values for one sensor, and which one is logged is a bit random. Therefore replace it with a custom template sensor which always gets the correct value
-
 sensor:
   - platform: template
     sensors:

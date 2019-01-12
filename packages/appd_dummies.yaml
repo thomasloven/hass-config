@@ -1,16 +1,23 @@
 homeassistant:
   customize:
-    input_number.appd_dummy:
-      hidden: true
-    input_datetime.appd_dummy:
-      hidden: true
-    input_select.appd_dummy:
-      hidden: true
-    input_boolean.appd_dummy:
-      hidden: true
-    input_text.appd_dummy:
-      hidden: true
+    package.node_anchors:
+      common: &common
+        package: "cameras"
+        hidden: true
 
+    input_number.appd_dummy:
+      <<: *common
+    input_datetime.appd_dummy:
+      <<: *common
+    input_select.appd_dummy:
+      <<: *common
+    input_boolean.appd_dummy:
+      <<: *common
+    input_text.appd_dummy:
+      <<: *common
+
+# Those things do nothing and will never be seen
+# Their only purpose is to make sure the services used to controll the corresponding entity types are loaded.
 input_number:
   appd_dummy:
     min: 0

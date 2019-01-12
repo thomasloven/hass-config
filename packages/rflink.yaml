@@ -14,7 +14,7 @@ homeassistant:
       <<: *common
     light.skotbord:
       <<: *common
-    light.bokhyll:
+    light.bokhylla:
       <<: *common
     switch.motorvarmare:
       <<: *common
@@ -22,7 +22,6 @@ homeassistant:
 rflink:
   host: !secret swarm_ip
   port: !secret rflink_port
-
 
 light:
   - platform: rflink

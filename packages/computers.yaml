@@ -1,3 +1,14 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: "computers"
+    binary_sensor.arrakis:
+      <<: *common
+    automation.desk_lamp_follows_computer:
+      <<: *common
+
+# Switched off/on when computer enters/leaves screen sleep
 binary_sensor:
   - platform: mqtt
     state_topic: "computer/arrakis/on"

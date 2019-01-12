@@ -1,6 +1,15 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: "computers"
+
+    shell_command.lovelace_gen:
+      <<: *common
+
 lovelace:
   mode: yaml
 
+# Regenerate ui_lovelace.yaml
 shell_command:
   lovelace_gen: '(python /config/www/homeassistant-lovelace-gen/lovelace-gen.py && echo "OK" || echo "FAILED") > /config/lovelace-gen.log'
-

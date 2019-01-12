@@ -1,3 +1,14 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: "environment"
+
+    sensor.time:
+      <<: *common
+    sensor.date:
+      <<: *common
+
 sensor:
   - platform: time_date
     display_options:

@@ -4,6 +4,9 @@ homeassistant:
       common: &common
         package: 'reminders'
 
+    automation.rem__kaffet_ar_klart:
+      <<: *common
+
 automation:
   - alias: REM - Kaffet är klart
     initial_state: True

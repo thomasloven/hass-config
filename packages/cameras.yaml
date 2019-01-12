@@ -2,7 +2,7 @@ homeassistant:
   customize:
     package.node_anchors:
       common: &common
-        package: 'cameras'
+        package: "cameras"
 
     camera.kontor:
       <<: *common
@@ -52,6 +52,7 @@ camera:
     username: !secret camera_barnrum_username
     password: !secret camera_barnrum_password
 
+# TODO: Move this to frontend
 switch:
   - platform: template
     switches:

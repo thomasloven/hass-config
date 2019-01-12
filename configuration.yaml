@@ -7,14 +7,16 @@ homeassistant:
   time_zone: !secret timezone_home
   unit_system: metric
 
+  # Everything important is here
   packages: !include_dir_named packages
 
-frontend:
 discovery:
+frontend:
 history:
 logbook:
 config:
 
 http:
+  # mydomain.com:443 - proxied by nginx to port 8123
   base_url: !secret base_url
   api_password: !secret api_password
