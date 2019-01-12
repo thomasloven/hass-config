@@ -2,5 +2,5 @@ lovelace:
   mode: yaml
 
 shell_command:
-  lovelace_gen: 'python /config/www/homeassistant-lovelace-gen/lovelace-gen.py'
+  lovelace_gen: '(python /config/www/homeassistant-lovelace-gen/lovelace-gen.py && echo "OK" || echo "FAILED") > /config/lovelace-gen.log'
 
