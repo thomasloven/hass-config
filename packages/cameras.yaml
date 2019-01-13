@@ -28,6 +28,9 @@ homeassistant:
       hidden: true
       icon: mdi:chevron-down
 
+    script.camera_ptz:
+      <<: *common
+
 ffmpeg:
 
 camera:
@@ -52,37 +55,22 @@ camera:
     username: !secret camera_barnrum_username
     password: !secret camera_barnrum_password
 
-# TODO: Move this to frontend
-switch:
-  - platform: template
-    switches:
-      barnrum_ptz_left:
-        <<: &ptz_switch
-          value_template: "{{ True }}"
-          turn_on:
-        turn_off:
-          - service: script.camera_ptz
-            data:
-              entity_id: camera.barnrum
-              dir: left
-      barnrum_ptz_right:
-        <<: *ptz_switch
-        turn_off:
-          - service: script.camera_ptz
-            data:
-              entity_id: camera.barnrum
-              dir: right
-      barnrum_ptz_up:
-        <<: *ptz_switch
-        turn_off:
-          - service: script.camera_ptz
-            data:
-              entity_id: camera.barnrum
-              dir: up
-      barnrum_ptz_down:
-        <<: *ptz_switch
-        turn_off:
-          - service: script.camera_ptz
-            data:
-              entity_id: camera.barnrum
-              dir: down
+# Script to step an onvif camera in the given direction.
+# Parameters:
+# entity_id - camera entity
+# dir - direction (left, right, up, down)
+script:
+  camera_ptz:
+    sequence:
+      - service: camera.onvif_ptz
+        data_template:
+          entity_id: "{{ entity_id }}"
+          pan: >
+            {{ {"left":"LEFT", "right":"RIGHT", "up":"NONE", "down":"NONE"}[dir] }}
+          tilt: >
+            {{ {"left":"NONE", "right":"NONE", "up":"UP", "down":"DOWN"}[dir] }}
+      - delay:
+          milliseconds: 100
+      - service: camera.onvif_ptz
+        data_template:
+          entity_id: "{{ entity_id }}"

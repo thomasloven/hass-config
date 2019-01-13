@@ -13,6 +13,7 @@ views:
     cards:
       - !include floorplan.yaml
       - !include coffee_card.yaml
+      - !include cameras/barnrum.yaml
       {{ dev_card }}
 
   - title: Floorplan

@@ -1,0 +1,63 @@
+{% set entity='"camera.barnrum"' %}
+type: picture-elements
+image: /local/images/placeholder-1280x720.png
+elements:
+  - type: image
+    camera_image: {{ entity }}
+    style:
+      left: 50%
+      top: 50%
+      height: 100%
+      width: 100%
+
+  - type: icon
+    icon: mdi:chevron-left
+    tap_action:
+      action: call-service
+      service: script.camera_ptz
+      service_data:
+        entity_id: {{ entity }}
+        dir: left
+    style:
+      left: 10%
+      top: 50%
+      color: yellow
+
+  - type: icon
+    icon: mdi:chevron-right
+    tap_action:
+      action: call-service
+      service: script.camera_ptz
+      service_data:
+        entity_id: {{ entity }}
+        dir: right
+    style:
+      left: 90%
+      top: 50%
+      color: yellow
+
+  - type: icon
+    icon: mdi:chevron-up
+    tap_action:
+      action: call-service
+      service: script.camera_ptz
+      service_data:
+        entity_id: {{ entity }}
+        dir: up
+    style:
+      left: 50%
+      top: 10%
+      color: yellow
+
+  - type: icon
+    icon: mdi:chevron-down
+    tap_action:
+      action: call-service
+      service: script.camera_ptz
+      service_data:
+        entity_id: {{ entity }}
+        dir: down
+    style:
+      left: 50%
+      top: 90%
+      color: yellow
