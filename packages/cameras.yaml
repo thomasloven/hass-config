@@ -10,6 +10,7 @@ homeassistant:
       <<: *common
     camera.barnrum:
       <<: *common
+      host: !secret camera_barnrum_host
 
     switch.barnrum_ptz_left:
       <<: *common
@@ -74,3 +75,9 @@ script:
       - service: camera.onvif_ptz
         data_template:
           entity_id: "{{ entity_id }}"
+
+rest_command:
+  camera_position:
+    url: http://{{ state_attr(entity_id, 'host')}}/web/cgi-bin/hi3510/param.cgi?cmd=preset&-act=goto&-number={{ position }}
+    username: !secret camera_barnrum_username
+    password: !secret camera_barnrum_password
