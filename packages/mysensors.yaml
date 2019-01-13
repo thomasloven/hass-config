@@ -21,6 +21,7 @@ homeassistant:
     light.skrivbordslampa_1:
       <<: *common
       friendly_name: Skrivbordslampa
+      icon: mdi:desk-lamp
 
 
 mysensors:

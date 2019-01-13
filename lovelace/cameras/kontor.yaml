@@ -18,22 +18,20 @@ elements:
       top: 0%
       height: 100px
       width: 100%
-      background: rgba(0,0,0,0.5)
+      background: rgba(0,0,0,0.3)
 
   - type: state-icon
     entity: light.taklampa_kontoret
-    icon: no:icon
     tap_action:
       action: toggle
     style:
-      left: 50px
+      left: 30px
       top: 25px
 
   - type: state-icon
     entity: light.skrivbordslampa_1
-    icon: no:icon
     tap_action:
       action: toggle
     style:
-      left: 150px
+      left: 66px
       top: 25px
