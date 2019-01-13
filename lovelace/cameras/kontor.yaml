@@ -1,0 +1,39 @@
+type: picture-elements
+image: /local/images/placeholder-800x600.png
+elements:
+  - type: image
+    camera_image: camera.kontor
+    style:
+      left: 50%
+      top: 50%
+      height: 100%
+      width: 100%
+
+  - type: icon
+    icon: no:icon
+    tap_action:
+      action: none
+    style:
+      left: 50%
+      top: 0%
+      height: 100px
+      width: 100%
+      background: rgba(0,0,0,0.5)
+
+  - type: state-icon
+    entity: light.taklampa_kontoret
+    icon: no:icon
+    tap_action:
+      action: toggle
+    style:
+      left: 50px
+      top: 25px
+
+  - type: state-icon
+    entity: light.skrivbordslampa_1
+    icon: no:icon
+    tap_action:
+      action: toggle
+    style:
+      left: 150px
+      top: 25px
