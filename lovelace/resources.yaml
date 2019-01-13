@@ -1,0 +1,6 @@
+- url: !file /local/lovelace-card-tools/card-tools.js
+  type: js
+- url: !file /local/lovelace-fold-entity-row/fold-entity-row.js
+  type: js
+- url: !file /local/lovelace-time-input-row/time-input-row.js
+  type: js

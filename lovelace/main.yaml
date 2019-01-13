@@ -1,13 +1,7 @@
 {% set dev_card="- !include dev_card.yaml" %}
 
 title: Åvägen
-resources:
-  - url: !file /local/lovelace-card-tools/card-tools.js
-    type: js
-  - url: !file /local/lovelace-fold-entity-row/fold-entity-row.js
-    type: js
-  - url: !file /local/lovelace-time-input-row/time-input-row.js
-    type: js
+resources: !include resources.yaml
 views:
   - title: Hemma
     cards:
