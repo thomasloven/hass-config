@@ -26,11 +26,12 @@ services:
 
   deconz:
     container_name: deCONZ
-    image: marthoc/deconz:amd64-2.05.54
+    image: marthoc/deconz:amd64-2.05.55
     restart: always
     ports:
       - "8082:8082"
       - "10443:10443"
+      - "5900:5900"
     devices:
       - "/dev/conbee:/dev/ttyUSB0"
     volumes:
@@ -38,6 +39,9 @@ services:
     environment:
       DECONZ_WEB_PORT: 8082
       DECONZ_WS_PORT: 10443
+      DECONZ_VNC_MODE: 1
+      # The following value is overridden in docker-compose.override.yml
+      DECONZ_VNC_PASSWORD: secret
 
   mosquitto:
     container_name: Mosquitto
