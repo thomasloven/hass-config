@@ -1,0 +1,28 @@
+type: entities
+title: Tid
+show_header_toggle: false
+entities:
+  - entity: sensor.time
+    name: Tid
+  - entity: sensor.date
+    name: Datum
+  - type: section
+    label: Tid på dygnet
+  - entity: input_select.tod
+    name: ' '
+  - entity: input_datetime.tod_morning
+    name: Morgon
+  - entity: input_datetime.tod_day
+    name: Dag
+  - entity: input_datetime.tod_evening
+    name: Kväll
+  - entity: input_datetime.tod_night
+    name: Natt
+
+  - type: section
+  - entity: switch.tod_dark
+    name: Mörkt
+  - entity: input_number.tod_sunrise_offset
+    name: Soluppgång +/- (min)
+  - entity: input_number.tod_sunset_offset
+    name: Solnedgång +/- (min)

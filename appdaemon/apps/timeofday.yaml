@@ -18,21 +18,21 @@ timeofday:
     default: "08:00"
     has_date: False
     has_time: True
-    friendly_name: Dag
+    friendly_name: Day
     icon: mdi:weather-sunny
   evening:
     name: input_datetime.tod_evening
     default: "19:00"
     has_date: False
     has_time: True
-    friendly_name: Kväll
+    friendly_name: Evening
     icon: mdi:weather-sunset-down
   night:
     name: input_datetime.tod_night
     default: "23:00"
     has_date: False
     has_time: True
-    friendly_name: Natt
+    friendly_name: Night
     icon: mdi:minus
   sunrise:
     name: input_number.tod_sunrise_offset

@@ -10,6 +10,7 @@ views:
       - !include cameras/barnrum.yaml
       - !include cameras/kontor.yaml
       - !include temperatures_card.yaml
+      - !include timeofday_card.yaml
       {{ dev_card }}
 
   - title: Floorplan
