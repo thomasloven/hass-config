@@ -1,0 +1,20 @@
+type: entities
+show_header_toggle: false
+title: Temperaturer
+entities:
+  - type: section
+    label: Senaste dygnet
+  - type: custom:hui-history-graph-card
+    hours_to_show: 24
+    entities:
+      - sensor.vardagsrum_0
+      - sensor.temperatursensor_atelje_1_0
+      - sensor.elmatare_0
+  - type: section
+    label: Senaste veckan
+  - type: custom:hui-history-graph-card
+    hours_to_show: 168
+    entities:
+      - sensor.vardagsrum_0
+      - sensor.temperatursensor_atelje_1_0
+      - sensor.elmatare_0

@@ -9,6 +9,7 @@ views:
       - !include coffee_card.yaml
       - !include cameras/barnrum.yaml
       - !include cameras/kontor.yaml
+      - !include temperatures_card.yaml
       {{ dev_card }}
 
   - title: Floorplan
