@@ -20,8 +20,8 @@ homeassistant:
       <<: *common
 
 rflink:
-  host: !secret swarm_ip
-  port: !secret rflink_port
+  host: rflink
+  port: 2000
 
 light:
   - platform: rflink

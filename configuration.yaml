@@ -13,7 +13,7 @@ homeassistant:
 discovery:
 frontend:
 recorder:
-  db_url: !secret db_url
+  db_url: mysql://hass:hass@db:3306/hass?charset=utf8
 history:
 logbook:
 config:

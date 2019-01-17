@@ -26,8 +26,8 @@ homeassistant:
 
 mysensors:
   gateways:
-    - device: !secret swarm_ip
-      tcp_port: !secret mysensors_port
+    - device: mysensors
+      tcp_port: 2000
       nodes:
         2: { name: Vardagsrum }
         24: { name: Skrivbordslampa }

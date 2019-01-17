@@ -1,11 +1,24 @@
 version: '2.0'
+
+networks:
+  # By adding the homeassistant image to this network, it gets a local ip in
+  # the network and can use the discovery component
+  host:
+    driver: macvlan
+    driver_opts:
+      parent: vmbr1
+    ipam:
+      config:
+      # The following values are overridden in docker-compose.override.yml
+        - subnet: <subnet>
+          gateway: <gateway ip>
+          ip_range: <homeassistant ip>/32
+
 services:
   mysensors:
     container_name: MySensors
     image: akshmakov/serialport-server:amd64
     restart: always
-    ports:
-      - "2000:2000"
     devices:
       - "/dev/mysensors:/dev/ttyUSB0"
     environment:
@@ -16,8 +29,6 @@ services:
     container_name: RFLink
     image: akshmakov/serialport-server:amd64
     restart: always
-    ports:
-      - "2001:2000"
     devices:
       - "/dev/rflink:/dev/ttyUSB0"
     environment:
@@ -29,9 +40,8 @@ services:
     image: marthoc/deconz:amd64-2.05.55
     restart: always
     ports:
-      - "8082:8082"
-      - "10443:10443"
-      - "5900:5900"
+      - "8082:8082" # Management port
+      - "5900:5900" # VNC port
     devices:
       - "/dev/conbee:/dev/ttyUSB0"
     volumes:
@@ -47,17 +57,15 @@ services:
     container_name: MariaDB
     image: mariadb
     restart: always
-    ports:
-      - "3306:3306"
     volumes:
       - /root/docker/mariadb:/var/lib/mysql
     environment:
       TZ: Europe/Stockholm
-      # The following values are overridden in docker-compose.override.yml
+      MYSQL_DATABASE: hass
+      MYSQL_USER: hass
+      MYSQL_PASSWORD: hass
+      # The following value is overridden in docker-compose.override.yml
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: secret
-      MYSQL_USER: secret
-      MYSQL_PASSWORD: secret
 
   mosquitto:
     container_name: Mosquitto
@@ -65,7 +73,7 @@ services:
     restart: always
     ports:
       - "1883:1883"
-      - "9001:9001"
+      - "9001:9001" # Websocket port
     volumes:
       - /root/docker/mosquitto/data:/mosquitto/data
       - /root/docker/mosquitto/log:/mosquitto/log
@@ -74,7 +82,9 @@ services:
     container_name: HomeAssistant
     image: homeassistant/home-assistant:0.85.0
     restart: always
-    network_mode: host
+    networks:
+      - default
+      - host
     ports:
       - "8123:8123"
     volumes:
@@ -86,14 +96,12 @@ services:
     container_name: AppDaemon
     image: acockburn/appdaemon
     restart: always
-    ports:
-      - "5050:5050"
     volumes:
       - /root/docker/hass/home-assistant/appdaemon:/conf
       - /root/docker/appdaemon/certs:/certs
     environment:
       TZ: Europe/Stockholm
       # The following values ar overridden in docker-compose.override.yml
-      HA_URL: host-ip:8123
-      DASH_URL: host-ip:5050
+      HA_URL: homeassistant:8123
+      DASH_URL: appdaemon:5050
       TOKEN: secret_token
