@@ -12,6 +12,8 @@ homeassistant:
 
 discovery:
 frontend:
+recorder:
+  db_url: !secret db_url
 history:
 logbook:
 config:

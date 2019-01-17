@@ -43,6 +43,22 @@ services:
       # The following value is overridden in docker-compose.override.yml
       DECONZ_VNC_PASSWORD: secret
 
+  db:
+    container_name: MariaDB
+    image: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - /root/docker/mariadb:/var/lib/mysql
+    environment:
+      TZ: Europe/Stockholm
+      # The following values are overridden in docker-compose.override.yml
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: secret
+      MYSQL_USER: secret
+      MYSQL_PASSWORD: secret
+
   mosquitto:
     container_name: Mosquitto
     image: eclipse-mosquitto:latest
