@@ -5,18 +5,23 @@ resources: !include resources.yaml
 views:
   - title: Hemma
     cards:
+      {{ dev_card }}
       - !include floorplan.yaml
       - !include coffee_card.yaml
       - !include cameras/barnrum.yaml
       - !include cameras/kontor.yaml
       - !include temperatures_card.yaml
-      - !include timeofday_card.yaml
-      {{ dev_card }}
 
   - title: Floorplan
     panel: true
     cards:
       - type: vertical-stack
         cards:
-        - !include floorplan.yaml
         {{ dev_card }}
+        - !include floorplan.yaml
+  - title: Dev
+    path: dev
+    icon: mdi:settings
+    cards:
+      {{ dev_card }}
+      - !include timeofday_card.yaml
