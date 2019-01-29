@@ -15,7 +15,7 @@ homeassistant:
     light.sovrum3:
       <<: *grouped
 
-    light.takfläkt:
+    light.takflakt:
       <<: *common
     light.takflakt_1:
       <<: *grouped

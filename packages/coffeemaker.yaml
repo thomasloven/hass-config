@@ -19,9 +19,9 @@ homeassistant:
       friendly_name: Slå av automatiskt
     script.cfe_off:
       <<: *common
-    automation.coffee__timer_on:
+    automation.coffee_timer_on:
       <<: *common
-    automation.coffee__auto_off:
+    automation.coffee_auto_off:
       <<: *common
 
 input_datetime:

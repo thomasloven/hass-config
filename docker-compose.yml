@@ -80,7 +80,8 @@ services:
 
   homeassistant:
     container_name: HomeAssistant
-    image: homeassistant/home-assistant:0.86.2
+    # The following value is overridden in docker-compose.override.yml
+    image: homeassistant/home-assistant:override_me
     restart: always
     networks:
       - default
