@@ -19,9 +19,4 @@ views:
         cards:
         {{ dev_card }}
         - !include floorplan.yaml
-  - title: Dev
-    path: dev
-    icon: mdi:settings
-    cards:
-      {{ dev_card }}
-      - !include timeofday_card.yaml
+  - !include views/dev_view.yaml
