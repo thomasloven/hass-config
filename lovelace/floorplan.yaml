@@ -57,6 +57,9 @@ cards:
       - entity: light.bokhylla
         style: { left: 55%, top: 45% }
         {{ lamp }}
+      - entity: light.deko_vardagsrum
+        style: { left: 49%, top: 15% }
+        {{ lamp }}
       - type: state-label
         entity: sensor.vardagsrum_0
         style: { left: 40%, top: 36% }
