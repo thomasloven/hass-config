@@ -1,0 +1,17 @@
+type: entities
+show_header_toggle: false
+title: Elförbrukning
+entities:
+  - type: section
+    label: Senaste dygnet
+  - type: custom:hui-history-graph-card
+    hours_to_show: 24
+    entities:
+      - sensor.filtered_power
+  - type: section
+    label: Senaste veckan
+  - type: custom:hui-history-graph-card
+    hours_to_show: 168
+    entities:
+      - sensor.filtered_power
+      - sensor.power_meter

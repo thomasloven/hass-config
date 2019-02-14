@@ -41,3 +41,8 @@ sensor:
       power_meter:
         value_template: "{{ states.sensor.elmatare_20.attributes.V_WATT }}"
         unit_of_measurement: 'W'
+  - platform: filter
+    name: "Filtered power"
+    entity_id: sensor.power_meter
+    filters:
+      - filter: lowpass

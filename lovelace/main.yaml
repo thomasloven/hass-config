@@ -1,22 +1,13 @@
-{% set dev_card="- !include dev_card.yaml" %}
-
 title: Åvägen
 resources: !include resources.yaml
 views:
-  - title: Hemma
-    cards:
-      {{ dev_card }}
-      - !include floorplan.yaml
-      - !include coffee_card.yaml
-      - !include cameras/barnrum.yaml
-      - !include cameras/kontor.yaml
-      - !include temperatures_card.yaml
-
+  - !include views/diverse_view.yaml
   - title: Floorplan
     panel: true
+    icon: mdi:floor-plan
     cards:
       - type: vertical-stack
         cards:
-        {{ dev_card }}
+        - !include dev_card.yaml
         - !include floorplan.yaml
   - !include views/dev_view.yaml
