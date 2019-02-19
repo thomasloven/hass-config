@@ -3,7 +3,5 @@ icon: mdi:home-assistant
 cards:
   - !include floorplan.yaml
   - !include coffee_card.yaml
-  - !include cameras/barnrum.yaml
-  - !include cameras/kontor.yaml
   - !include temperatures_card.yaml
   - !include power_card.yaml

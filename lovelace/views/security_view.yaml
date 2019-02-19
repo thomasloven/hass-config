@@ -1,0 +1,6 @@
+title: Security
+icon: mdi:shield-home
+cards:
+  - !include cameras/barnrum.yaml
+  - !include cameras/kontor.yaml
+  - !include cameras/vardagsrum.yaml

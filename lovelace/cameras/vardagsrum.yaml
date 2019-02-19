@@ -1,0 +1,10 @@
+type: picture-elements
+image: /local/images/placeholder-800x600.png
+elements:
+  - type: image
+    camera_image: camera.vardagsrum
+    style:
+      left: 50%
+      top: 50%
+      height: 100%
+      width: 100%

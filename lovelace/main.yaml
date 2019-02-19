@@ -2,6 +2,7 @@ title: Åvägen
 resources: !include resources.yaml
 views:
   - !include views/diverse_view.yaml
+  - !include views/security_view.yaml
   - title: Floorplan
     panel: true
     icon: mdi:floor-plan
