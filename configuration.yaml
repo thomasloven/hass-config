@@ -17,6 +17,10 @@ recorder:
 history:
 logbook:
 config:
+logger:
+  default: info
+  logs:
+    homeassistant.components.http.view: warn
 
 system_health:
 
