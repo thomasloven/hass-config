@@ -9,6 +9,6 @@ views:
     cards:
       - type: vertical-stack
         cards:
-        - !include dev_card.yaml
         - !include floorplan.yaml
+        - !include dev_card.yaml
   - !include views/dev_view.yaml

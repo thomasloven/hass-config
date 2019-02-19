@@ -8,6 +8,18 @@ outside_lights:
     - entity_manager
   lights:
     - light.ute_framsidan
+    - light.baksida
+    - light.entre
+    - light.fasad_1
+    - light.fasad_2
+    - light.fasad_3
+    - light.fasad_4
+    - light.fasad_5
+    - light.fasad_6
+    - light.fasad_7
+    - light.fasad_8
+    - light.mellangang
+    - light.uppfart
 
 
 decorative_lights:

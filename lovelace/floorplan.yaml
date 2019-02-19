@@ -53,12 +53,18 @@ cards:
       {{ lamp('light.skotbord', 21, 15) }}
 
     # Utomhus
-      {{ lamp('light.ute_framsidan', 44, 94) }}
-      {{ lamp('light.ute_framsidan', 16, 94) }}
-      {{ lamp('light.ute_framsidan', 60, 94) }}
-      {{ lamp('light.ute_framsidan', 75, 94) }}
-      {{ lamp('light.ute_framsidan', 95, 30) }}
-      {{ lamp('light.ute_framsidan', 95, 70) }}
+      {{ dimlamp('light.baksida', 35, 5) }}
+      {{ dimlamp('light.mellangang', 10, 30) }}
+      {{ dimlamp('light.uppfart', 5, 94) }}
+      {{ dimlamp('light.entre', 44, 94) }}
+      {{ dimlamp('light.fasad_1', 16, 94) }}
+      {{ dimlamp('light.fasad_2', 60, 94) }}
+      {{ dimlamp('light.fasad_3', 75, 94) }}
+      {{ dimlamp('light.fasad_4', 88, 94) }}
+      {{ dimlamp('light.fasad_5', 92, 70) }}
+      {{ dimlamp('light.fasad_6', 97, 70) }}
+      {{ dimlamp('light.fasad_7', 92, 30) }}
+      {{ dimlamp('light.fasad_8', 97, 30) }}
       - type: state-label
         entity: sensor.elmatare_0
         style: { left: 5%, top: 55% }
