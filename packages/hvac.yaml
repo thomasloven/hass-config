@@ -1,0 +1,20 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      hvac_switch: &hvac_switch switch.ventilation
+      common: &common
+        package: hvac
+
+automation:
+  - alias: HVAC - Auto off
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: *hvac_switch
+        to: 'on'
+        for:
+          hours: 1
+    action:
+      - service: homeassistant.turn_off
+        data:
+          entity_id: *hvac_switch

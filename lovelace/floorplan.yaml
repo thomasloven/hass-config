@@ -51,6 +51,10 @@ cards:
 
     # Tvättstuga
       {{ lamp('light.skotbord', 21, 15) }}
+      - type: state-icon
+        entity: switch.ventilation
+        tap_action: { action: toggle }
+        style: { left: 30%, top: 30% }
 
     # Utomhus
       {{ dimlamp('light.baksida', 35, 5) }}
