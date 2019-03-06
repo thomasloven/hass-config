@@ -14,17 +14,21 @@ homeassistant:
       <<: *grouped
     light.sovrum3:
       <<: *grouped
-
     light.takflakt:
       <<: *common
-    light.takflakt_1:
+    light.fasadbelysning:
+      <<: *common
+    light.ytterbelysning:
+      <<: *common
+    light.taklampor:
+      <<: *common
+
+  customize_glob:
+    light.takflakt_*:
       <<: *grouped
-    light.takflakt_2:
+    light.fasad_*:
       <<: *grouped
-    light.takflakt_3:
-      <<: *grouped
-    light.takflakt_4:
-      <<: *grouped
+
 
 light:
   - platform: group
@@ -33,6 +37,7 @@ light:
       - light.sovrum1
       - light.sovrum2
       - light.sovrum3
+
   - platform: group
     name: Takfläkt
     entities:
@@ -40,3 +45,34 @@ light:
       - light.takflakt_2
       - light.takflakt_3
       - light.takflakt_4
+
+  - platform: group
+    name: Fasadbelysning
+    entities:
+      - light.fasad_1
+      - light.fasad_2
+      - light.fasad_3
+      - light.fasad_4
+      - light.fasad_5
+      - light.fasad_6
+      - light.fasad_7
+      - light.fasad_8
+
+  - platform: group
+    name: Ytterbelysning
+    entities:
+      - light.entre
+      - light.baksida
+      - light.mellangang
+      - light.uppfart
+
+  - platform: group
+    name: Taklampor
+    entities:
+      - light.lilla_hallen
+      - light.sovrum
+      - light.stora_hallen
+      - light.takflakt
+      - light.taklampa_koket
+      - light.taklampa_kontoret
+      - light.vardagsrum
