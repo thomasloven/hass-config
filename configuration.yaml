@@ -12,6 +12,7 @@ homeassistant:
 
 discovery:
 frontend:
+  themes: !include_dir_merge_named themes
 recorder:
   db_url: mysql://hass:hass@db:3306/hass?charset=utf8
 history:
