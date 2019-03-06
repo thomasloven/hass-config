@@ -4,3 +4,4 @@ cards:
   - !include cameras/barnrum.yaml
   - !include cameras/kontor.yaml
   - !include cameras/vardagsrum.yaml
+  - !include cameras/hallen.yaml

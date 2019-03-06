@@ -56,6 +56,10 @@ camera:
     username: !secret camera_barnrum_username
     password: !secret camera_barnrum_password
 
+  - name: Hallen
+    platform: generic
+    still_image_url: !secret camera_hallen_url
+
 # Script to step an onvif camera in the given direction.
 # Parameters:
 # entity_id - camera entity
