@@ -1,5 +1,40 @@
 title: Åvägen
 resources: !include resources.yaml
+background: var(--lovelace-background)
+popup_cards:
+  light.taklampor:
+    title: Taklampor
+    card:
+      type: entities
+      entities:
+        - light.lilla_hallen
+        - light.sovrum
+        - light.stora_hallen
+        - light.takflakt
+        - light.taklampa_koket
+        - light.taklampa_kontoret
+        - light.vardagsrum
+  light.takflakt:
+    title: Takfläkt
+    card:
+      type: entities
+      entities:
+        - type: custom:slider-entity-row
+          entity: light.takflakt
+          name: All
+        - type: section
+        - type: custom:slider-entity-row
+          entity: light.takflakt_1
+          name: 1
+        - type: custom:slider-entity-row
+          entity: light.takflakt_2
+          name: 2
+        - type: custom:slider-entity-row
+          entity: light.takflakt_3
+          name: 3
+        - type: custom:slider-entity-row
+          entity: light.takflakt_4
+          name: 4
 views:
   - !include views/diverse_view.yaml
   - !include views/security_view.yaml

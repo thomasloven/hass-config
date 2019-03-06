@@ -1,97 +1,72 @@
-type: vertical-stack
-cards:
-  - type: picture-elements
-    image: !file /local/images/Bottenvåning.png
-    elements:
+type: picture-elements
+image: !file /local/images/Bottenvåning.png
+elements:
 
-      {% macro lamp(entity, x, y) -%}
-      - entity: {{entity}}
-        style: { left: {{x}}%, top: {{y}}% }
-        type: state-icon
-        tap_action: { action: toggle }
-      {%- endmacro %}
-      {% macro dimlamp(entity, x, y) -%}
-      - entity: {{entity}}
-        style: { left: {{x}}%, top: {{y}}% }
-        type: state-icon
-        tap_action: { action: toggle }
-        hold_action: { action: more-info }
-      {%- endmacro %}
+  {% macro lamp(entity, x, y) -%}
+  - entity: {{entity}}
+    style: { left: {{x}}%, top: {{y}}% }
+    type: state-icon
+    tap_action: { action: toggle }
+  {%- endmacro %}
+  {% macro dimlamp(entity, x, y) -%}
+  - entity: {{entity}}
+    style: { left: {{x}}%, top: {{y}}% }
+    type: state-icon
+    tap_action: { action: toggle }
+    hold_action: { action: more-info }
+  {%- endmacro %}
 
-      # Kontoret
-      {{ dimlamp('light.taklampa_kontoret', 82, 68) }}
-      {{ lamp('light.kontor_fonster', 83, 87) }}
-      {{ dimlamp('light.skrivbordslampa_1', 88, 58) }}
+  # Kontoret
+  {{ dimlamp('light.taklampa_kontoret', 82, 68) }}
+  {{ lamp('light.kontor_fonster', 83, 87) }}
+  {{ dimlamp('light.skrivbordslampa_1', 88, 58) }}
 
-      # Lilla hallen
-      {{ dimlamp('light.lilla_hallen', 72, 53) }}
+  # Lilla hallen
+  {{ dimlamp('light.lilla_hallen', 72, 53) }}
 
-      # Stora hallen
-      {{ dimlamp('light.stora_hallen', 43, 70) }}
-      {{ lamp('light.trappbelysning', 49, 61) }}
+  # Stora hallen
+  {{ dimlamp('light.stora_hallen', 43, 70) }}
+  {{ lamp('light.trappbelysning', 49, 61) }}
 
-     # Köket
-      {{ dimlamp('light.taklampa_koket', 32, 76) }}
-      - type: state-icon
-        entity: switch.kaffebryggare
-        tap_action: { action: toggle }
-        style: { left: 16%, top: 84% }
+ # Köket
+  {{ dimlamp('light.taklampa_koket', 32, 76) }}
+  - type: state-icon
+    entity: switch.kaffebryggare
+    tap_action: { action: toggle }
+    style: { left: 16%, top: 84% }
 
-    # Vardagsrummet
-      {{ dimlamp('light.vardagsrum', 60, 30) }}
-      {{ dimlamp('light.takflakt', 43, 30) }}
-      {{ lamp('light.bokhylla', 55, 45) }}
-      {{ lamp('light.deko_vardagsrum', 49, 15) }}
-      - type: state-label
-        entity: sensor.vardagsrum_0
-        style: { left: 40%, top: 36% }
+# Vardagsrummet
+  {{ dimlamp('light.vardagsrum', 60, 30) }}
+  {{ dimlamp('light.takflakt', 43, 30) }}
+  {{ lamp('light.bokhylla', 55, 45) }}
+  {{ lamp('light.deko_vardagsrum', 49, 15) }}
+  - type: state-label
+    entity: sensor.vardagsrum_0
+    style: { left: 40%, top: 36% }
 
-    # Sovrum
-      {{ dimlamp('light.sovrum', 81, 30) }}
+# Sovrum
+  {{ dimlamp('light.sovrum', 81, 30) }}
 
-    # Tvättstuga
-      {{ lamp('light.skotbord', 21, 15) }}
-      - type: state-icon
-        entity: switch.ventilation
-        tap_action: { action: toggle }
-        style: { left: 30%, top: 30% }
+# Tvättstuga
+  {{ lamp('light.skotbord', 21, 15) }}
+  - type: state-icon
+    entity: switch.ventilation
+    tap_action: { action: toggle }
+    style: { left: 30%, top: 30% }
 
-    # Utomhus
-      {{ dimlamp('light.baksida', 35, 5) }}
-      {{ dimlamp('light.mellangang', 10, 30) }}
-      {{ dimlamp('light.uppfart', 5, 94) }}
-      {{ dimlamp('light.entre', 44, 94) }}
-      {{ dimlamp('light.fasad_1', 16, 94) }}
-      {{ dimlamp('light.fasad_2', 60, 94) }}
-      {{ dimlamp('light.fasad_3', 75, 94) }}
-      {{ dimlamp('light.fasad_4', 88, 94) }}
-      {{ dimlamp('light.fasad_5', 92, 70) }}
-      {{ dimlamp('light.fasad_6', 97, 70) }}
-      {{ dimlamp('light.fasad_7', 92, 30) }}
-      {{ dimlamp('light.fasad_8', 97, 30) }}
-      - type: state-label
-        entity: sensor.elmatare_0
-        style: { left: 5%, top: 55% }
-
-  - type: custom:popup-card
-    entity: light.takflakt
-    title: Takfläkt
-    card:
-      type: entities
-      entities:
-        - type: custom:slider-entity-row
-          entity: light.takflakt
-          name: All
-        - type: section
-        - type: custom:slider-entity-row
-          entity: light.takflakt_1
-          name: 1
-        - type: custom:slider-entity-row
-          entity: light.takflakt_2
-          name: 2
-        - type: custom:slider-entity-row
-          entity: light.takflakt_3
-          name: 3
-        - type: custom:slider-entity-row
-          entity: light.takflakt_4
-          name: 4
+# Utomhus
+  {{ dimlamp('light.baksida', 35, 5) }}
+  {{ dimlamp('light.mellangang', 10, 30) }}
+  {{ dimlamp('light.uppfart', 5, 94) }}
+  {{ dimlamp('light.entre', 44, 94) }}
+  {{ dimlamp('light.fasad_1', 16, 94) }}
+  {{ dimlamp('light.fasad_2', 60, 94) }}
+  {{ dimlamp('light.fasad_3', 75, 94) }}
+  {{ dimlamp('light.fasad_4', 88, 94) }}
+  {{ dimlamp('light.fasad_5', 92, 70) }}
+  {{ dimlamp('light.fasad_6', 97, 70) }}
+  {{ dimlamp('light.fasad_7', 92, 30) }}
+  {{ dimlamp('light.fasad_8', 97, 30) }}
+  - type: state-label
+    entity: sensor.elmatare_0
+    style: { left: 5%, top: 55% }
