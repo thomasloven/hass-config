@@ -29,3 +29,5 @@ http:
   # mydomain.com:443 - proxied by nginx to port 8123
   base_url: !secret base_url
   api_password: !secret api_password
+
+cloud:
