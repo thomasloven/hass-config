@@ -7,6 +7,31 @@ homeassistant:
     automation.rem_kaffet_ar_klart:
       <<: *common
 
+
+binary_sensor:
+  - platform: template
+    sensors:
+      sopor:
+        friendly_name: Sopor
+        icon_template: >-
+          {% if is_state('binary_sensor.sopor', 'on') %}
+          mdi:delete
+          {% else %}
+          mdi:delete-outline
+          {% endif %}
+        value_template: >-
+          {% set retval = False %}
+          {% if (states('sensor.week') | int) % 2 == 0 %}
+            {% if now().weekday() == 6 %}
+              {% set retval = True %}
+            {% endif %}
+          {% else %}
+            {% if now().weekday() == 0 and now().hour < 12 %}
+              {% set retval = True %}
+            {% endif %}
+          {% endif %}
+          {{retval}}
+
 automation:
   - alias: REM - Kaffet är klart
     initial_state: True
