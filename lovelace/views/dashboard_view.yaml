@@ -1,0 +1,56 @@
+title: Dashboard
+path: dashboard
+icon: mdi:home-assistant
+panel: true
+cards:
+  - type: custom:layout-card
+    layout: vertical
+    column_width: [-, 200px]
+    cards:
+    - type: custom:layout-card
+      column_width: 350
+      max_width: 960
+      layout: vertical
+      cards:
+      - type: custom:weather-card
+        entity: weather.smhi_home
+        icons: /local/weather_icons/
+      - break
+      - type: horizontal-stack
+        cards:
+          - type: picture
+            image: /local/images/thomas_clr.jpg
+          - type: picture
+            image: /local/images/anneli_clr.png
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: light.ytterbelysning
+            tap_action:
+              action: toggle
+          - type: entity-button
+            entity: light.fasadbelysning
+            tap_action:
+              action: toggle
+          - type: entity-button
+            entity: light.taklampor
+            name: Lampor inne
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: sun.sun
+          - type: entity-button
+            entity: binary_sensor.sopor
+    - break
+    - type: entity-button
+      entity: switch.varme_jst
+      name: JST
+      icon: mdi:fan
+      tap_action:
+        action: toggle
+    - type: entity-button
+      entity: switch.varme_mhr
+      name: MHR
+      icon: mdi:fan
+      tap_action:
+        action: toggle

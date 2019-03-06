@@ -10,3 +10,10 @@
   type: js
 - url: !file /local/lovelace-auto-entities/auto-entities.js
   type: js
+- url: !file /local/lovelace-layout-card/layout-card.js
+  type: js
+
+  # Specially modified by helto
+  # https://github.com/helto4real/hassio/tree/master/www/custom_cards
+- url: !file /local/weather-card.js
+  type: module

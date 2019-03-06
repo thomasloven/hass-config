@@ -36,6 +36,7 @@ popup_cards:
           entity: light.takflakt_4
           name: 4
 views:
+  - !include views/dashboard_view.yaml
   - !include views/diverse_view.yaml
   - !include views/security_view.yaml
   - title: Floorplan
