@@ -48,6 +48,9 @@ script:
       - service: homeassistant.turn_off
         data:
           entity_id: *cfe_switch
+      - service: script.info_message
+        data_template:
+          message: "Slår av kaffebryggaren ({{ states('input_number.cfe_off') | int }} minuter)"
 
 automation:
   - alias: Coffee - Timer On
@@ -67,6 +70,8 @@ automation:
       - service: homeassistant.turn_on
         data:
           entity_id: *cfe_switch
+      - service: script.info_message
+        data: {message: "Slår på kaffebryggaren (timer)"}
 
   - alias: Coffee - Auto Off
     initial_state: True

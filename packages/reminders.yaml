@@ -46,3 +46,6 @@ automation:
         data:
           title: "Fikadax!"
           message: "Kaffet är färdigt!"
+      - service: script.info_message
+        data:
+          message: "Kaffet är färdigt!"

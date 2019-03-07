@@ -18,3 +18,5 @@ automation:
       - service: homeassistant.turn_off
         data:
           entity_id: *hvac_switch
+      - service: script.info_message
+        data: { message: "Stänger av takfläkt"}
