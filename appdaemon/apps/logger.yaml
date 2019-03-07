@@ -1,0 +1,5 @@
+logger:
+  module: logger
+  class: Logger
+  global_dependencies:
+    - base

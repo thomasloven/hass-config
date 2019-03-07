@@ -1,0 +1,48 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: "logging"
+
+notify:
+  - platform: rest
+    name: discord_log
+    method: POST
+    message_param_name: content
+    title_param_name: username
+    data:
+      username: Åvägen
+    resource: !secret discord_log
+  - platform: rest
+    name: discord_info
+    method: POST
+    message_param_name: content
+    title_param_name: username
+    data:
+      username: Åvägen
+    resource: !secret discord_info
+
+
+script:
+  log_message:
+    sequence:
+      - service: notify.discord_log
+        data_template:
+          message: "{{ message }}"
+  info_message:
+    sequence:
+      - service: notify.discord_info
+        data_template:
+          message: "{{ message }}"
+      - service: notify.discord_log
+        data_template:
+          message: "INFO: {{ message }}"
+
+automation:
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: script.info_message
+      data:
+        message: "Home Assistant started!"
