@@ -5,8 +5,27 @@ panel: true
 cards:
   - type: custom:layout-card
     layout: vertical
-    column_width: [-, 200px]
+    column_width: 350
+    max_width: [200px,100%]
+    rtl: true
     cards:
+    - type: custom:layout-card
+      column_width: 150
+      max_width: 200
+      cards:
+      - type: entity-button
+        entity: switch.varme_jst
+        name: JST
+        icon: mdi:fan
+        tap_action:
+          action: toggle
+      - type: entity-button
+        entity: switch.varme_mhr
+        name: MHR
+        icon: mdi:fan
+        tap_action:
+          action: toggle
+    - break
     - type: custom:layout-card
       column_width: 350
       max_width: 960
@@ -41,16 +60,3 @@ cards:
             entity: sun.sun
           - type: entity-button
             entity: binary_sensor.sopor
-    - break
-    - type: entity-button
-      entity: switch.varme_jst
-      name: JST
-      icon: mdi:fan
-      tap_action:
-        action: toggle
-    - type: entity-button
-      entity: switch.varme_mhr
-      name: MHR
-      icon: mdi:fan
-      tap_action:
-        action: toggle

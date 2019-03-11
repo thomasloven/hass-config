@@ -12,6 +12,7 @@ binary_sensor:
   - platform: template
     sensors:
       sopor:
+        entity_id: sensor.time
         friendly_name: Sopor
         icon_template: >-
           {% if is_state('binary_sensor.sopor', 'on') %}
