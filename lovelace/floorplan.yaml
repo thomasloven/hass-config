@@ -30,6 +30,8 @@ elements:
 
  # Köket
   {{ dimlamp('light.taklampa_koket', 32, 76) }}
+  {{ lamp('light.koksfonster', 22, 87) }}
+  {{ lamp('light.koksfonster', 28, 87) }}
   - type: state-icon
     entity: switch.kaffebryggare
     tap_action: { action: toggle }

@@ -8,6 +8,7 @@ outside_lights:
     - entity_manager
   lights:
     - light.ytterbelysning
+    - light.koksfonster
 
 
 decorative_lights:

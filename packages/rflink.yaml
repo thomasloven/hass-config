@@ -18,6 +18,8 @@ homeassistant:
       <<: *common
     switch.motorvarmare:
       <<: *common
+    light.koksfonster:
+      <<: *common
 
 rflink:
   host: rflink
@@ -39,6 +41,8 @@ light:
         name: Skötbord
       newkaku_01b029f6_3:
         name: Bokhylla
+      newkaku_01b029f7_3:
+        name: Köksfönster
 
 switch:
   - platform: rflink
