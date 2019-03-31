@@ -24,6 +24,7 @@ logger:
 http:
   # mydomain.com:443 - proxied by nginx to port 8123
   base_url: !secret base_url
-  api_password: !secret api_password
+  use_x_forwarded_for: true
+  trusted_proxies: !secret proxy_hosts
 
 cloud:
