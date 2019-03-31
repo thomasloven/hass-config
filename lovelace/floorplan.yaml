@@ -27,6 +27,12 @@ elements:
   # Stora hallen
   {{ dimlamp('light.stora_hallen', 43, 70) }}
   {{ lamp('light.trappbelysning', 49, 61) }}
+  - type: state-icon
+    entity: binary_sensor.framdorr
+    style: { left: 43%, top: 87% }
+  - type: state-badge
+    entity: sensor.temperatursensor_atelje_1_0
+    style: { left: 55%, top: 54% }
 
  # Köket
   {{ dimlamp('light.taklampa_koket', 32, 76) }}
@@ -42,7 +48,7 @@ elements:
   {{ dimlamp('light.takflakt', 43, 30) }}
   {{ lamp('light.bokhylla', 55, 45) }}
   {{ lamp('light.deko_vardagsrum', 49, 15) }}
-  - type: state-label
+  - type: state-badge
     entity: sensor.vardagsrum_0
     style: { left: 40%, top: 36% }
 
@@ -51,6 +57,12 @@ elements:
 
 # Tvättstuga
   {{ lamp('light.skotbord', 21, 15) }}
+  - type: state-badge
+    entity: sensor.badrum_temp
+    style: { left: 27%, top: 35% }
+  - type: state-badge
+    entity: sensor.badrum_humidity
+    style: { left: 27%, top: 40% }
   - type: state-icon
     entity: switch.ventilation
     tap_action: { action: toggle }
@@ -69,6 +81,6 @@ elements:
   {{ dimlamp('light.fasad_6', 97, 70) }}
   {{ dimlamp('light.fasad_7', 92, 30) }}
   {{ dimlamp('light.fasad_8', 97, 30) }}
-  - type: state-label
+  - type: state-badge
     entity: sensor.elmatare_0
     style: { left: 5%, top: 55% }
