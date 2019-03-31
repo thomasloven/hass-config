@@ -1,63 +1,83 @@
 title: Dev
 path: dev
 icon: mdi:settings
+panel: true
 cards:
-  - !include dev_card.yaml
-  - !include timeofday_card.yaml
-  - !include local_services.hidden.yaml
-  - type: custom:auto-entities
-    card:
-      type: entities
-      title: Tända lampor
-    filter:
-      include:
-        - domain: light
-          state: "on"
-      exclude:
-        - attributes:
-            hidden: true
-  - type: custom:auto-entities
-    card:
-      type: entities
-      title: Släckta lampor
-    filter:
-      include:
-        - domain: light
-          state: "off"
-      exclude:
-        - attributes:
-            hidden: true
-  - type: custom:auto-entities
-    card:
-      type: entities
-      title: Lampor/Brytare
-    filter:
-      include:
-        - domain: light
-          options:
-            secondary_info: entity-id
-        - domain: switch
-          options:
-            secondary_info: entity-id
-  - type: custom:auto-entities
-    card:
-      type: entities
-      title: Batterier
-    filter:
-      include:
-        - attributes:
-            device_class: "battery"
-          options:
-            secondary_info: entity-id
-  - type: custom:auto-entities
-    card:
-      type: entities
-      title: Övriga Sensorer
-    filter:
-      include:
-        - domain: sensor
-          options:
-            secondary_info: entity-id
-      exclude:
-        - attributes:
-            device_class: "battery"
+  - type: custom:layout-card
+    rebuild: 1000
+    cards:
+      - !include dev_card.yaml
+      - !include timeofday_card.yaml
+      - !include local_services.hidden.yaml
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Okänd status
+        filter:
+          include:
+            - state: "unavailable"
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Tända lampor
+        filter:
+          include:
+            - domain: light
+              state: "on"
+          exclude:
+            - attributes:
+                hidden: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Släckta lampor
+        filter:
+          include:
+            - domain: light
+              state: "off"
+          exclude:
+            - attributes:
+                hidden: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Lampor/Brytare
+        filter:
+          include:
+            - domain: light
+              options:
+                secondary_info: entity-id
+            - domain: switch
+              options:
+                secondary_info: entity-id
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Batterier
+        filter:
+          include:
+            - attributes:
+                device_class: "battery"
+              options:
+                secondary_info: entity-id
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Övriga Sensorer
+        filter:
+          include:
+            - domain: sensor
+              options:
+                secondary_info: entity-id
+          exclude:
+            - attributes:
+                device_class: "battery"
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Automationer
+        filter:
+          include:
+            - domain: automation
+              options:
+                secondary_info: entity-id
