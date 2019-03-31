@@ -10,20 +10,16 @@ homeassistant:
   # Everything important is here
   packages: !include_dir_named packages
 
+default_config:
 discovery:
 frontend:
   themes: !include_dir_merge_named themes
 recorder:
   db_url: mysql://hass:hass@db:3306/hass?charset=utf8
-history:
-logbook:
-config:
 logger:
   default: info
   logs:
     homeassistant.components.http.view: warn
-
-system_health:
 
 http:
   # mydomain.com:443 - proxied by nginx to port 8123

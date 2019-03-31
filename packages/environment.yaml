@@ -20,5 +20,3 @@ sensor:
     headers:
       Accept: application/json
     value_template: '{{ value_json.week | int }}'
-
-sun:
