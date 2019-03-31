@@ -1,0 +1,43 @@
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret vacuum_host
+    token: !secret vacuum_token
+
+script:
+  vacuum_hall:
+    sequence:
+      - service: vacuum.xiaomi_clean_zone
+        data:
+          repeats: 1
+          zone:
+            - [23200, 25200, 27500, 28000]
+  vacuum_kitchen:
+    sequence:
+      - service: vacuum.xiaomi_clean_zone
+        data:
+          repeats: 1
+          zone:
+            - [23200, 21000, 27500, 25200]
+  vacuum_daily:
+    sequence:
+      - service: vacuum.xiaomi_clean_zone
+        data:
+          repeats: 1
+          zone:
+            - [23200, 25200, 27500, 28000]
+            - [23200, 21000, 27500, 25200]
+  vacuum_all:
+    sequence:
+      - service: vacuum.start
+  vacuum_empty:
+    sequence:
+      - service: vacuum.send_command
+        data:
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+          command: app_goto_target
+          params: [26000, 26000]
+  vacuum_home:
+    sequence:
+      - service: vacuum.return_to_base
+        data:
+          entity_id: vacuum.xiaomi_vacuum_cleaner

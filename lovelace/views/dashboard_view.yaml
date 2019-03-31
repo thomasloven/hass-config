@@ -2,6 +2,17 @@ title: Dashboard
 path: dashboard
 icon: mdi:home-assistant
 panel: true
+popup_cards:
+  vacuum.xiaomi_vacuum_cleaner:
+    title: Dammsugare
+    card:
+      type: entities
+      entities:
+        - vacuum.xiaomi_vacuum_cleaner
+        - script.vacuum_home
+        - script.vacuum_empty
+        - script.vacuum_daily
+        - script.vacuum_all
 cards:
   - type: custom:layout-card
     layout: vertical
@@ -57,6 +68,6 @@ cards:
       - type: horizontal-stack
         cards:
           - type: entity-button
-            entity: sun.sun
+            entity: vacuum.xiaomi_vacuum_cleaner
           - type: entity-button
             entity: binary_sensor.sopor
