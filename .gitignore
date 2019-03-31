@@ -4,6 +4,7 @@
 !configuration.yaml
 !docker-compose.yml
 !packages/
+packages/**/*_secret.yaml
 **/__pycache__/
 !/appdaemon/
 /appdaemon/*
