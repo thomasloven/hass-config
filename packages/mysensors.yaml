@@ -27,6 +27,7 @@ homeassistant:
 mysensors:
   gateways:
     - device: mysensors
+      persistence_file: "/config/mysensors.json"
       tcp_port: 2000
       nodes:
         2: { name: Vardagsrum }
