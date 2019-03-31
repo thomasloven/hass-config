@@ -2,12 +2,13 @@ homeassistant:
   customize:
     package.node_anchors:
       hvac_switch: &hvac_switch switch.ventilation
+      hvac_sensor: &hvac_sensor sensor.badrum_humidity
       common: &common
         package: hvac
 
 automation:
-  - alias: HVAC - Auto off
-    initial_state: True
+  - alias: HVAC - Timer off
+    initial_state: False
     trigger:
       - platform: state
         entity_id: *hvac_switch
@@ -20,3 +21,30 @@ automation:
           entity_id: *hvac_switch
       - service: script.info_message
         data: { message: "Stänger av takfläkt"}
+
+  - alias: HVAC - Auto on
+    initial_state: True
+    trigger:
+      - platform: numeric_state
+        entity_id: *hvac_sensor
+        above: 50
+    action:
+      - service: homeassistant.turn_on
+        data:
+          entity_id: *hvac_switch
+      - service: script.info_message
+        data: { message: "Fuktigt - takfläkt på" }
+  - alias: HVAC - Auto off
+    initial_state: True
+    trigger:
+      - platform: numeric_state
+        entity_id: *hvac_sensor
+        below: 50
+        for:
+          minutes: 15
+    action:
+      - service: homeassistant.turn_off
+        data:
+          entity_id: *hvac_switch
+      - service: script.info_message
+        data: { message: "Torrt - takfläkt av" }
