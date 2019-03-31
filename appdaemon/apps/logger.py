@@ -10,6 +10,8 @@ class Logger(Base):
 
     def log_out(self, message):
         self.call_service('notify/discord_log', message=message)
+    def info_out(self, message):
+        self.call_service('notify/discord_info', message=message)
 
     def event(self, name, data, kwargs):
         if name == 'call_service' and data['service'] == 'discord_log':
