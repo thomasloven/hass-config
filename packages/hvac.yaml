@@ -27,7 +27,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: *hvac_sensor
-        above: 50
+        above: 60
     action:
       - service: homeassistant.turn_on
         data:
