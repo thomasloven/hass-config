@@ -1,0 +1,45 @@
+type: vertical-stack
+cards:
+  - type: custom:auto-entities
+    card: { type: entities }
+    filter:
+      include:
+        - entity_id: switch.vacuum_*
+  - type: horizontal-stack
+    cards:
+    - type: entity-button
+      entity: sun.sun
+      icon: mdi:broom
+      name: Städa
+      tap_action:
+        action: call-service
+        service: python_script.event
+        service_data:
+          event: VACUUM_ZONE
+    - type: entity-button
+      entity: sun.sun
+      icon: mdi:broom
+      name: Städa Allt
+      tap_action:
+        action: call-service
+        service: python_script.event
+        service_data:
+          event: VACUUM_ALL
+    - type: entity-button
+      entity: sun.sun
+      icon: mdi:wrench
+      name: Töm
+      tap_action:
+        action: call-service
+        service: python_script.event
+        service_data:
+          event: VACUUM_SERVICE
+    - type: entity-button
+      entity: sun.sun
+      icon: mdi:sleep
+      name: Vila
+      tap_action:
+        action: call-service
+        service: python_script.event
+        service_data:
+          event: VACUUM_HOME

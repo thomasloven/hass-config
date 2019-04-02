@@ -5,14 +5,7 @@ panel: true
 popup_cards:
   vacuum.xiaomi_vacuum_cleaner:
     title: Dammsugare
-    card:
-      type: entities
-      entities:
-        - vacuum.xiaomi_vacuum_cleaner
-        - script.vacuum_home
-        - script.vacuum_empty
-        - script.vacuum_daily
-        - script.vacuum_all
+    card: !include vacuum_card.yaml
 cards:
   - type: custom:layout-card
     layout: vertical

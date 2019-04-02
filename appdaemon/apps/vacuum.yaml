@@ -1,0 +1,29 @@
+vacuum:
+  module: vacuum
+  class: Vacuum
+  global_dependencies:
+    - base
+    - entities
+
+  entity_id: vacuum.xiaomi_vacuum_cleaner
+
+  empty_spot: [26000, 26000]
+
+  zones:
+    kitchen:
+      # Left, bottom, right, top
+      area: [23200, 21000, 27500, 25100]
+      friendly_name: Köket
+    hall:
+      area: [23200, 25300, 27500, 28000]
+      friendly_name: Hallen
+    livingroom:
+      area: [19000, 24000, 23000, 31200]
+      friendly_name: Vardagsrum
+    bedroom:
+      area: [19000, 31500, 23500, 35500]
+      friendly_name: Sovrum
+    office:
+      area: [23300, 31000, 27500, 35500]
+      friendly_name: Kontoret
+

@@ -11,5 +11,6 @@ packages/**/*_secret.yaml
 !/appdaemon/apps
 *.json
 *.hidden.*
+!python_scripts
 
 !/lovelace/

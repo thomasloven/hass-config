@@ -28,3 +28,5 @@ http:
   trusted_proxies: !secret proxy_hosts
 
 cloud:
+
+python_script:
