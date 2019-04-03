@@ -3,3 +3,8 @@ logger:
   class: Logger
   global_dependencies:
     - base
+
+  channels:
+    log: !secret discord_log
+    info: !secret discord_info
+
