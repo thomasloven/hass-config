@@ -13,12 +13,12 @@ class Vacuum(Entities):
             name = f'switch.vacuum_{zone}'
             self.register_entity(zone, name, True, "off", e)
 
-        self.listen_event(self.zone, 'VACUUM_ZONE')
-        self.listen_event(self.all, 'VACUUM_ALL')
+        self.listen_event(self.clean_zone, 'VACUUM_ZONE')
+        self.listen_event(self.clean_all, 'VACUUM_ALL')
         self.listen_event(self.service, 'VACUUM_SERVICE')
         self.listen_event(self.home, 'VACUUM_HOME')
 
-    def zone(self, ev, data, kwargs):
+    def clean_zone(self, ev, data, kwargs):
         areas = []
         for zone in self.args['zones']:
             if self.e[zone].state == "on":
@@ -26,7 +26,7 @@ class Vacuum(Entities):
 
         self.call_service("vacuum/xiaomi_clean_zone", repeats = 1, zone = areas)
 
-    def all(self, ev, data, kwargs):
+    def clean_all(self, ev, data, kwargs):
         self.call_service("vacuum/start")
     def service(self, ev, data, kwargs):
         self.call_service("vacuum/send_command", entity_id = self.entity_id, command = 'app_goto_target', params = self.args['empty_spot'])
