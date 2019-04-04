@@ -49,7 +49,8 @@ class Entity:
 
     def __init__(self, hass, entity, managed=False, state=None, attributes=None):
         self._hass = hass
-        self._entity = entity
+        self.entity_id = entity
+        self.domain, self.name = entity.split('.')
         self._managed = managed
         self.manager = hass.get_app('entity_manager') if managed else {}
         self._state = self.manager.get(entity, state)
@@ -82,7 +83,7 @@ class Entity:
         self._attributes = new['attributes']
         old, new = self._laststate, self._state
         if old != new:
-            self.manager[self._entity] = self._state
+            self.manager[self.entity_id] = self._state
             self._laststate = new
             self._callback(old, new)
 
@@ -93,9 +94,9 @@ class Entity:
 
     # Updating state
     def pull(self):
-        d = self._hass.get_state(self._entity, attribute='all')
+        d = self._hass.get_state(self.entity_id, attribute='all')
         self._state = d['state']
-        self.manager[self._entity] = self._state
+        self.manager[self.entity_id] = self._state
         self._laststate = self._state
         self._attributes = d['attributes']
 
@@ -104,15 +105,15 @@ class Entity:
             self.set_state(self._laststate, self._state)
             self._laststate = self._state
             self._callback(self._laststate, self._state)
-        self._hass.set_state(self._entity, state=self._state, attributes=self._attributes)
-        self.manager[self._entity] = self._state
+        self._hass.set_state(self.entity_id, state=self._state, attributes=self._attributes)
+        self.manager[self.entity_id] = self._state
 
     def set_state(self, old, new):
         pass
 
     # If the entity is controller by appd, changes made in the GUI will be communicated via service calls
     def _service_listener(self, event, data, kwarg):
-        if data['service_data'].get('entity_id', '') == self._entity:
+        if data['service_data'].get('entity_id', '') == self.entity_id:
             self.service_callback(data)
 
     def service_callback(self, data):
@@ -135,10 +136,10 @@ class LightEntity(Entity):
 
     def set_state(self, old, new):
         if new == "on" or new == True:
-            self._hass.call_service("light/turn_on", entity_id = self._entity)
+            self._hass.call_service("light/turn_on", entity_id = self.entity_id)
             self._state = "on"
         elif new == "off" or new == False:
-            self._hass.call_service("light/turn_off", entity_id = self._entity)
+            self._hass.call_service("light/turn_off", entity_id = self.entity_id)
             self._state = "off"
 
 
