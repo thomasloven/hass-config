@@ -1,5 +1,6 @@
 {% set entity='"camera.barnrum"' %}
 type: picture-elements
+title: Barnrum
 image: /local/images/placeholder-1280x720.png
 elements:
   - type: image

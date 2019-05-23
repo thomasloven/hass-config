@@ -1,8 +1,15 @@
 type: picture-elements
+title: Kontoret
 image: /local/images/placeholder-800x600.png
 elements:
-  - type: image
-    camera_image: camera.kontor
+  # Only show camera feed if noone is home
+  - type: custom:hui-conditional-card
+    conditions:
+      - entity: binary_sensor.home_occupied
+        state: "off"
+    card:
+      type: custom:hui-image-element
+      camera_image: camera.kontor
     style:
       left: 50%
       top: 50%
@@ -15,10 +22,10 @@ elements:
       action: none
     style:
       left: 50%
-      top: 0%
-      height: 100px
+      top: 25px
+      height: 50px
       width: 100%
-      background: rgba(0,0,0,0.3)
+      background: rgba(128,128,128,0.3)
 
   - type: state-icon
     entity: light.taklampa_kontoret

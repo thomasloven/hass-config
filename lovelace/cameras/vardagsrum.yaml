@@ -1,8 +1,14 @@
 type: picture-elements
+title: Vardagsrum
 image: /local/images/placeholder-800x600.png
 elements:
-  - type: image
-    camera_image: camera.vardagsrum
+  - type: custom:hui-conditional-card
+    conditions:
+      - entity: binary_sensor.home_occupied
+        state: "off"
+    card:
+      type: custom:hui-image-element
+      camera_image: camera.vardagsrum
     style:
       left: 50%
       top: 50%
