@@ -1,5 +1,5 @@
 tts:
-  - platform: google
+  - platform: google_translate
     language: 'sv'
     # Use local address for tts in order to work with chromecasts
     # http://<internal.ip.of.hass>:8123
