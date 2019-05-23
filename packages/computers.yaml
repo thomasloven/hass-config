@@ -14,6 +14,23 @@ binary_sensor:
     state_topic: "computer/arrakis/on"
     name: Arrakis
 
+
+sensor:
+  - platform: glances
+    host: glances
+    version: 3
+    name: swarm
+    resources:
+      - disk_use_percent
+      - memory_use_percent
+      - processor_load
+      - cpu_use_percent
+      - cpu_temp
+      - docker_active
+      - docker_cpu_use
+      - docker_memory_use
+
+
 automation:
   - alias: Desk lamp follows computer
     initial_state: True

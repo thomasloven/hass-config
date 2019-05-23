@@ -81,3 +81,11 @@ cards:
             - domain: automation
               options:
                 secondary_info: entity-id
+
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Swarm
+        filter:
+          include:
+            - entity_id: sensor.swarm_*

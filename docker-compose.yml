@@ -106,3 +106,17 @@ services:
       HA_URL: homeassistant:8123
       DASH_URL: appdaemon:5050
       TOKEN: secret_token
+
+  glances:
+    container_name: glances
+    image: nicolargo/glances
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      TZ: Europe/Stockholm
+      GLANCES_OPT: -w
+    pid: host
+    ports:
+      - 61208:61208
+      - 61209:61209
