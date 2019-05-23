@@ -43,6 +43,7 @@ class Entities(base.Base):
                 'input_select': InputSelectEntity,
                 }.get(domain, Entity)
         self.e[name] = controller(self, entity, managed, default, attributes)
+        return self.e[name]
 
 
 class Entity:
@@ -52,8 +53,9 @@ class Entity:
         self.entity_id = entity
         self.domain, self.name = entity.split('.')
         self._managed = managed
-        self.manager = hass.get_app('entity_manager') if managed else {}
-        self._state = self.manager.get(entity, state)
+        manager = hass.get_app('entity_manager') if managed else {}
+        self.manager = manager
+        self._state = manager.get(entity, state)
         self._laststate = None
         self._attributes = attributes
         self._listeners = []
