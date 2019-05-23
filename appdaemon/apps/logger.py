@@ -19,13 +19,13 @@ class Logger(Base):
         # Send messages from the queue, but keep track of the rate limit
         while len(self.q):
             msg = self.q.popleft()
-            url = self.args['channels'][msg['channel']]
+            url = self.args['channels'][msg.get('channel', 'log')]
             if url:
                 res = requests.post(url, json={
                     "content": msg['message'],
                     "username": "Appdaemon",
                     })
-            if res.status_code == 429 or res.headers['X-RateLimit-Remaining'] == 0:
+            if res.status_code == 429 or (res.status_code == 200 and res.headers['X-RateLimit-Remaining'] == 0):
                 # If rate limit exceeded or nearly so
                 if res.status_code == 429:
                     self.q.appendleft(msg)
@@ -43,7 +43,7 @@ class Logger(Base):
         if len(self.q) == 1:
             self.run_in(self.send, 1)
     def log_event(self, ev, data, kwargs):
-        self.log_write(data['message'], data['channel'])
+        self.log_write(data['message'], data.get('channel', 'log'))
 
 
     def event(self, name, data, kwargs):
