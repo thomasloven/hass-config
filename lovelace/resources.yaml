@@ -17,3 +17,6 @@
   # https://github.com/helto4real/hassio/tree/master/www/custom_cards
 - url: !file /local/weather-card.js
   type: module
+
+- url: !file /local/more-info-card.js
+  type: js

@@ -43,3 +43,6 @@ cards:
         service: python_script.event
         service_data:
           event: VACUUM_HOME
+
+  - type: custom:more-info-card
+    entity: vacuum.xiaomi_vacuum_cleaner

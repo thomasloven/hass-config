@@ -81,6 +81,9 @@ cards:
             - domain: automation
               options:
                 secondary_info: entity-id
+      - type: custom:more-info-card
+        entity: vacuum.xiaomi_vacuum_cleaner
+        title: Vacuum cleaner
 
       - type: custom:auto-entities
         card:
