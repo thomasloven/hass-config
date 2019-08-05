@@ -3,17 +3,35 @@ image: !file /local/images/Bottenvåning.png
 elements:
 
   {% macro lamp(entity, x, y) -%}
+  {% if not no_light %}
   - entity: {{entity}}
     style: { left: {{x}}%, top: {{y}}% }
     type: state-icon
     tap_action: { action: toggle }
+  {% endif %}
   {%- endmacro %}
   {% macro dimlamp(entity, x, y) -%}
+  {% if not no_light %}
   - entity: {{entity}}
     style: { left: {{x}}%, top: {{y}}% }
     type: state-icon
     tap_action: { action: toggle }
     hold_action: { action: more-info }
+  {% endif %}
+  {%- endmacro %}
+  {% macro icon(entity, x, y) -%}
+  {% if not no_other %}
+  - entity: {{entity}}
+    style: { left: {{x}}%, top: {{y}}% }
+    type: state-icon
+  {% endif %}
+  {%- endmacro %}
+  {% macro badge(entity, x, y) -%}
+  {% if not no_other %}
+  - entity: {{entity}}
+    style: { left: {{x}}%, top: {{y}}% }
+    type: state-badge
+  {% endif %}
   {%- endmacro %}
 
   # Kontoret
@@ -27,46 +45,35 @@ elements:
   # Stora hallen
   {{ dimlamp('light.stora_hallen', 43, 70) }}
   {{ lamp('light.trappbelysning', 49, 61) }}
-  - type: state-icon
-    entity: binary_sensor.framdorr
-    style: { left: 43%, top: 87% }
-  - type: state-badge
-    entity: sensor.temperatursensor_atelje_1_0
-    style: { left: 55%, top: 54% }
+  {{ icon('binary_sensor.hall_ytterdorr', 43, 87) }}
+  {{ badge('sensor.temperatursensor_atelje_1_0', 55, 54) }}
 
  # Köket
   {{ dimlamp('light.taklampa_koket', 32, 76) }}
   {{ lamp('light.koksfonster', 22, 87) }}
   {{ lamp('light.koksfonster', 28, 87) }}
-  - type: state-icon
-    entity: switch.kaffebryggare
-    tap_action: { action: toggle }
-    style: { left: 16%, top: 84% }
+  {{ icon('switch.kaffebryggare', 16, 84) }}
 
 # Vardagsrummet
   {{ dimlamp('light.vardagsrum', 60, 30) }}
   {{ dimlamp('light.takflakt', 43, 30) }}
   {{ lamp('light.bokhylla', 55, 45) }}
   {{ lamp('light.deko_vardagsrum', 49, 15) }}
-  - type: state-badge
-    entity: sensor.vardagsrum_0
-    style: { left: 40%, top: 36% }
+  {{ badge('sensor.vardagsrum_0', 40, 36) }}
+  {{ icon('binary_sensor.vardagsrum_ytterdorr', 38, 12) }}
 
 # Sovrum
   {{ dimlamp('light.sovrum', 81, 30) }}
+  {{ icon('binary_sensor.sovrum_ytterdorr', 78, 12) }}
 
 # Tvättstuga
   {{ lamp('light.skotbord', 21, 15) }}
-  - type: state-badge
-    entity: sensor.badrum_temp
-    style: { left: 27%, top: 35% }
-  - type: state-badge
-    entity: sensor.badrum_humidity
-    style: { left: 27%, top: 40% }
-  - type: state-icon
-    entity: switch.ventilation
-    tap_action: { action: toggle }
-    style: { left: 30%, top: 30% }
+  {{ icon('binary_sensor.tvattstuga_ytterdorr', 13, 24) }}
+
+# # Badrum
+  {{ badge('sensor.badrum_temp', 27, 30) }}
+  {{ badge('sensor.badrum_humidity', 27, 40) }}
+  {{ icon('switch.ventilation', 27, 20) }}
 
 # Utomhus
   {{ dimlamp('light.baksida', 35, 5) }}
@@ -81,6 +88,4 @@ elements:
   {{ dimlamp('light.fasad_6', 97, 70) }}
   {{ dimlamp('light.fasad_7', 92, 30) }}
   {{ dimlamp('light.fasad_8', 97, 30) }}
-  - type: state-badge
-    entity: sensor.elmatare_0
-    style: { left: 5%, top: 55% }
+  {{ badge('sensor.elmatare_0', 5, 55) }}

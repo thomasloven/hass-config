@@ -1,7 +1,8 @@
 title: Diverse
 icon: mdi:home-assistant
 cards:
-  - !include floorplan.yaml
+  - !include floorplan.yaml {"no_other":"true"}
+  - !include floorplan.yaml {"no_light":"true"}
   - !include coffee_card.yaml
   - !include temperatures_card.yaml
   - !include power_card.yaml
