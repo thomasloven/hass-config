@@ -1,0 +1,37 @@
+presence_thomas:
+  module: presence
+  class: Presence
+  global_dependencies:
+    - entities
+    - timers
+  dependencies:
+    - entity_manager
+
+  name: device_tracker.thomas_presence
+  attributes: {}
+
+  devices:
+    - device_tracker.thomas_iphone_beta
+    - device_tracker.thomas_iphone_2
+    - sensor.thomas_iphone_bt
+    - sensor.thomas_iphone_bt2
+
+presence_anneli:
+  module: presence
+  class: Presence
+  global_depencencies:
+    - entities
+    - timers
+  dependencies:
+    - entity_manager
+
+  name: device_tracker.anneli_presence
+  attributes: {}
+
+  devices:
+    - device_tracker.anneli_lovn
+    - device_tracker.anneli_loven
+    - sensor.anneli_iphone_bt
+    - sensor.anneli_iphone_bt2
+    # - sensor.anneli_klocka_bt
+    # - sensor.anneli_klocka_bt2

@@ -21,6 +21,43 @@ popup_cards:
       - type: history-graph
         entities: *door_entities
 
+  device_tracker.thomas_presence:
+    title: Thomas
+    large: true
+    card:
+      type: vertical-stack
+      cards:
+      - type: entities
+        entities: &thomas_entities
+        - device_tracker.thomas_iphone_beta
+        - device_tracker.thomas_iphone_2
+        - sensor.thomas_iphone_bt
+        - sensor.thomas_iphone_bt2
+      - type: history-graph
+        entities:
+        - device_tracker.thomas_presence
+      - type: history-graph
+        entities: *thomas_entities
+
+  device_tracker.anneli_presence:
+    title: Anneli
+    large: true
+    card:
+      type: vertical-stack
+      cards:
+      - type: entities
+        entities: &anneli_entities
+        - device_tracker.anneli_lovn
+        - device_tracker.anneli_loven
+        - sensor.anneli_iphone_bt
+        - sensor.anneli_iphone_bt2
+        - sensor.anneli_klocka_bt
+        - sensor.anneli_klocka_bt2
+      - type: history-graph
+        entities:
+        - device_tracker.anneli_presence
+      - type: history-graph
+        entities: *anneli_entities
 cards:
   - type: custom:layout-card
     layout: vertical
@@ -56,10 +93,22 @@ cards:
       - break
       - type: horizontal-stack
         cards:
-          - type: picture
-            image: /local/images/thomas_clr.jpg
-          - type: picture
-            image: /local/images/anneli_clr.png
+          - type: picture-entity
+            entity: device_tracker.thomas_presence
+            image: /local/images/thomas_bw.jpg
+            show_name: false
+            show_state: false
+            state_image:
+              "home": /local/images/thomas_clr.jpg
+              "just_arrived": /local/images/thomas_clr.jpg
+          - type: picture-entity
+            entity: device_tracker.anneli_presence
+            image: /local/images/anneli_bw.png
+            show_name: false
+            show_state: false
+            state_image:
+              "home": /local/images/anneli_clr.png
+              "just_arrived": /local/images/anneli_clr.png
       - type: horizontal-stack
         cards:
           - type: entity-button

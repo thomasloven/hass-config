@@ -1,0 +1,37 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: 'security'
+
+    binary_sensor.home_occupied:
+      <<: *common
+    automation.adm_rescan_monitor_on_restart:
+      <<: *common
+
+binary_sensor:
+  - platform: template
+    sensors:
+      home_occupied:
+        friendly_name: Anyone home
+        value_template: >-
+          {{ (is_state('device_tracker.thomas_presence', 'home') or
+          is_state('device_tracker.anneli_presence', 'home')) }}
+
+device_tracker:
+  - platform: unifi
+    host: unifi
+    username: !secret unifi_username
+    password: !secret unifi_password
+    verify_ssl: false
+    ssid_filter: !secret unifi_ssids
+
+automation:
+  - alias: ADM - Rescan monitor on restart
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "monitor/scan/restart"
