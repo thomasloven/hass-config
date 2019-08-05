@@ -92,6 +92,7 @@ services:
       - /root/docker/hass/home-assistant:/config
     environment:
       TZ: Europe/Stockholm
+      XDG_CACHE_HOME: /config/.data
 
   appdaemon:
     container_name: AppDaemon
