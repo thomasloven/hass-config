@@ -10,6 +10,7 @@ entities:
       - sensor.vardagsrum_0
       - sensor.temperatursensor_atelje_1_0
       - sensor.elmatare_0
+      - sensor.badrum_temp
   - type: section
     label: Senaste veckan
   - type: custom:hui-history-graph-card
@@ -17,4 +18,5 @@ entities:
     entities:
       - sensor.vardagsrum_0
       - sensor.temperatursensor_atelje_1_0
-      - sensor.elmatare_0
+      # - sensor.elmatare_0
+      - sensor.badrum_temp

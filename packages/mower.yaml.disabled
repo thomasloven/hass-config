@@ -1,0 +1,13 @@
+sensor:
+  - platform: tcp
+    name: mower_battery
+    host: 192.168.0.228
+    port: 23
+    payload: "?B"
+    unit_of_measurement: "mV"
+  - platform: tcp
+    name: mower_state
+    host: 192.168.0.228
+    port: 23
+    payload: "?M"
+    value_template: "{{ ['MOWING','LAUNCHING','DOCKING', 'CHARGING', 'LOOKING FOR BWF', 'SETUP', 'IDLE'][value|int] }}"

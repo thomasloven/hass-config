@@ -8,6 +8,7 @@ cards:
     cards:
       - !include dev_card.yaml
       - !include timeofday_card.yaml
+      - type: custom:browser-player
       - !include local_services.hidden.yaml
       - type: custom:auto-entities
         card:

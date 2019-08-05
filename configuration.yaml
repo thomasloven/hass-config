@@ -29,4 +29,26 @@ http:
 
 cloud:
 
+stream:
+
 python_script:
+
+automation:
+  - alias: Hallampa på
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.framdorr
+      to: "on"
+    condition:
+      condition: state
+      entity_id: switch.tod_dark
+      state: "on"
+    action:
+      - service: light.turn_on
+        entity_id: light.stora_hallen
+
+browser_mod:
+  devices:
+    d94309ff-1b8be6a4:
+      name: hallen

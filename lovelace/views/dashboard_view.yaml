@@ -87,6 +87,21 @@ cards:
       max_width: 960
       layout: vertical
       cards:
+      - type: custom:useful-markdown-card
+        style: |
+          ha-card {
+            padding-top: 24px;
+          }
+          h1 {
+            text-align: center;
+            font-size: 6em;
+          }
+          h2 {
+            text-align: center;
+          }
+        content: |
+          # [[ sensor.time ]]
+          ## [[ sensor.date ]]
       - type: custom:weather-card
         entity: weather.smhi_home
         icons: /local/weather_icons/
