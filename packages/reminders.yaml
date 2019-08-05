@@ -4,6 +4,8 @@ homeassistant:
       common: &common
         package: 'reminders'
 
+    binary_sensor.sopor:
+      <<: *common
     automation.rem_kaffet_ar_klart:
       <<: *common
 
