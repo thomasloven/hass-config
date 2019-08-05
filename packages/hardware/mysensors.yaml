@@ -2,7 +2,7 @@ homeassistant:
   customize:
     package.node_anchors:
       common: &common
-        package: "mysensors"
+        package: "hardware/mysensors"
 
   customize_glob:
     sensor.vardagsrum_0:
@@ -23,6 +23,10 @@ homeassistant:
       friendly_name: Skrivbordslampa
       icon: mdi:desk-lamp
 
+# logger:
+#   logs:
+#     mysensors: debug
+#     homeassistant.components.mysensors: debug
 
 mysensors:
   gateways:

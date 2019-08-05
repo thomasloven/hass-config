@@ -2,10 +2,10 @@ homeassistant:
   customize:
     package.node_anchors:
       common: &common
-        package: "rflink"
+        package: "hardware/rflink"
 
-    light.ute_framsidan:
-      <<: *common
+    # light.ute_framsidan:
+    #   <<: *common
     light.trappbelysning:
       <<: *common
     light.kontor_fonster:
@@ -16,8 +16,8 @@ homeassistant:
       <<: *common
     light.bokhylla:
       <<: *common
-    switch.motorvarmare:
-      <<: *common
+    # switch.motorvarmare:
+    #   <<: *common
     light.koksfonster:
       <<: *common
 
@@ -29,8 +29,8 @@ light:
   - platform: rflink
     automatic_add: false
     devices:
-      newkaku_0008f252_1:
-        name: Ute Framsidan
+      # newkaku_0008f252_1:
+      #   name: Ute Framsidan
       ab400d_000042_2:
         name: Trappbelysning
       unitec_e1b8_01:
@@ -44,9 +44,9 @@ light:
       newkaku_01b029f7_3:
         name: Köksfönster
 
-switch:
-  - platform: rflink
-    devices:
-      newkaku_018cf7f6_10:
-        name: Motorvärmare
+# switch:
+#   - platform: rflink
+#     devices:
+#       newkaku_018cf7f6_10:
+#         name: Motorvärmare
 
