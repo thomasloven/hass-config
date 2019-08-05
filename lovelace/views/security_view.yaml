@@ -5,3 +5,14 @@ cards:
   - !include cameras/kontor.yaml
   - !include cameras/vardagsrum.yaml
   - !include cameras/hallen.yaml
+  - type: entities
+    entities:
+      - type: custom:hui-glance-card
+        entities:
+          - binary_sensor.hall_ytterdorr
+          - binary_sensor.vardagsrum_ytterdorr
+          - binary_sensor.sovrum_ytterdorr
+          - binary_sensor.tvattstuga_ytterdorr
+          - binary_sensor.koket_vatten
+      - sensor.mold_indicator
+      - sensor.tygvind_humidity

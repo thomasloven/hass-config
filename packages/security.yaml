@@ -1,0 +1,86 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      common: &common
+        package: 'security'
+      door: &door
+        <<: *common
+        device_class: door
+
+    binary_sensor.door_open:
+      <<: *common
+    binary_sensor.hall_ytterdorr:
+      <<: *door
+    binary_sensor.tvattstuga_ytterdorr:
+      <<: *door
+    binary_sensor.vardagsrum_ytterdorr:
+      <<: *door
+    binary_sensor.sovrum_ytterdorr:
+      <<: *door
+
+binary_sensor:
+  - platform: template
+    sensors:
+      door_open:
+        entity_id:
+          - binary_sensor.hall_ytterdorr
+          - binary_sensor.tvattstuga_ytterdorr
+          - binary_sensor.vardagsrum_ytterdorr
+          - binary_sensor.sovrum_ytterdorr
+        value_template: >-
+          {{ (is_state('binary_sensor.hall_ytterdorr', 'on') or
+          is_state('binary_sensor.tvattstuga_ytterdorr', 'on') or
+          is_state('binary_sensor.vardagsrum_ytterdorr', 'on') or
+          is_state('binary_sensor.sovrum_ytterdorr', 'on')) }}
+        device_class: door
+
+sensor:
+  - platform: mold_indicator
+    indoor_temp_sensor: sensor.tygvind_temp
+    indoor_humidity_sensor: sensor.tygvind_humidity
+    outdoor_temp_sensor: sensor.elmatare_0
+    calibration_factor: 3.0
+
+    # 2019-06-11 22:45
+    # Ute 14.6
+    # Inne 18.8
+    # Kritisk 15.0
+    # (18.8-14.6)/(16.0-14.6) = 4.2/1.4 = 10.5
+
+automation:
+  - alias: SEQ - Door opened
+    trigger:
+      platform: state
+      entity_id:  binary_sensor.door_open
+      to: 'on'
+    condition:
+      - condition: state
+        entity_id: binary_sensor.home_occupied
+        state: 'off'
+    action:
+      - service: notify.ios_thomas_iphone
+        data:
+          title: "LARM!"
+          message: "En dörr öppnades!"
+  - alias: SEQ - Water leak
+    trigger:
+      platform: state
+      entity_id:  binary_sensor.koket_vatten
+      to: 'on'
+    action:
+      - service: notify.ios_thomas_iphone
+        data:
+          title: "LARM!"
+          message: "Blött i köksskåpet!"
+  - alias: SEQ - Mold warning
+    trigger:
+      platform: numeric_state
+      entity_id:  sensor.mold_indicator
+      above: 80
+      for:
+        hours: 1
+    action:
+      - service: notify.ios_thomas_iphone
+        data_template:
+          title: "LARM!"
+          message: "Hög mögelrisk på vinden! {{ states('sensor.mold_indicator') }}%"

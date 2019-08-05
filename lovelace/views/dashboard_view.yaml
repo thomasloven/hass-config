@@ -6,6 +6,21 @@ popup_cards:
   vacuum.xiaomi_vacuum_cleaner:
     title: Dammsugare
     card: !include vacuum_card.yaml
+
+  binary_sensor.door_open:
+    title: Öppna dörrar
+    card:
+      type: vertical-stack
+      cards:
+      - type: entities
+        entities: &door_entities
+          - binary_sensor.hall_ytterdorr
+          - binary_sensor.tvattstuga_ytterdorr
+          - binary_sensor.vardagsrum_ytterdorr
+          - binary_sensor.sovrum_ytterdorr
+      - type: history-graph
+        entities: *door_entities
+
 cards:
   - type: custom:layout-card
     layout: vertical
@@ -62,5 +77,9 @@ cards:
         cards:
           - type: entity-button
             entity: vacuum.xiaomi_vacuum_cleaner
+            name: Dammsugare
           - type: entity-button
             entity: binary_sensor.sopor
+          - type: entity-button
+            entity: binary_sensor.door_open
+            name: Öppen dörr
