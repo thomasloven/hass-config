@@ -1,10 +1,11 @@
-{% set entity='"camera.barnrum"' %}
+anchors:
+  camera: &camera camera.barnrum
 type: picture-elements
 title: Barnrum
 image: /local/images/placeholder-1280x720.png
 elements:
   - type: image
-    camera_image: {{ entity }}
+    camera_image: *camera
     style:
       left: 50%
       top: 50%
@@ -17,7 +18,7 @@ elements:
       action: call-service
       service: script.camera_ptz
       service_data:
-        entity_id: {{ entity }}
+        entity_id: *camera
         dir: left
     style:
       left: 30px
@@ -30,7 +31,7 @@ elements:
       action: call-service
       service: script.camera_ptz
       service_data:
-        entity_id: {{ entity }}
+        entity_id: *camera
         dir: right
     style:
       right: 6px
@@ -43,7 +44,7 @@ elements:
       action: call-service
       service: script.camera_ptz
       service_data:
-        entity_id: {{ entity }}
+        entity_id: *camera
         dir: up
     style:
       left: 50%
@@ -56,7 +57,7 @@ elements:
       action: call-service
       service: script.camera_ptz
       service_data:
-        entity_id: {{ entity }}
+        entity_id: *camera
         dir: down
     style:
       left: 50%
@@ -69,7 +70,7 @@ elements:
       action: call-service
       service: rest_command.camera_position
       service_data:
-        entity_id: camera.barnrum
+        entity_id: *camera
         position: 0
     style:
       left: 30px
@@ -81,7 +82,7 @@ elements:
       action: call-service
       service: rest_command.camera_position
       service_data:
-        entity_id: camera.barnrum
+        entity_id: *camera
         position: 1
     style:
       left: 66px
