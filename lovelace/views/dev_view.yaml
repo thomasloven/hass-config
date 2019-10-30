@@ -6,10 +6,9 @@ cards:
   - type: custom:layout-card
     rebuild: 1000
     cards:
-      - !include dev_card.yaml
-      - !include timeofday_card.yaml
+      - !include ../timeofday_card.yaml
       - type: custom:browser-player
-      - !include local_services.hidden.yaml
+      - !include ../local_services.hidden.yaml
       - type: custom:auto-entities
         card:
           type: entities
@@ -17,6 +16,9 @@ cards:
         filter:
           include:
             - state: "unavailable"
+          exclude:
+            - attributes:
+                type: browser_mod
       - type: custom:auto-entities
         card:
           type: entities
@@ -51,6 +53,9 @@ cards:
             - domain: switch
               options:
                 secondary_info: entity-id
+          exclude:
+            - attributes:
+                type: browser_mod
       - type: custom:auto-entities
         card:
           type: entities
@@ -61,6 +66,19 @@ cards:
                 device_class: "battery"
               options:
                 secondary_info: entity-id
+                style: |
+                  {% if state_attr(config.entity, 'unit_of_measurement') == "%" %}
+                  :host {
+                    --paper-item-icon-color:
+                      {% if states(config.entity)|float < 25 %}
+                        red
+                      {% elif states(config.entity)|float < 40 %}
+                        orange
+                      {% else %}
+                        var(--text-light-color)
+                      {% endif %};
+                  }
+                  {% endif %}
       - type: custom:auto-entities
         card:
           type: entities

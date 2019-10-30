@@ -1,19 +1,11 @@
+# lovelace_gen
+
 - url: !file /local/lovelace-card-tools/card-tools.js
-  type: js
-- url: !file /local/lovelace-fold-entity-row/fold-entity-row.js
-  type: js
-- url: !file /local/lovelace-time-input-row/time-input-row.js
-  type: js
-- url: !file /local/lovelace-popup-card/popup-card.js
-  type: js
-- url: !file /local/lovelace-slider-entity-row/slider-entity-row.js
   type: js
 - url: !file /local/lovelace-auto-entities/auto-entities.js
   type: js
 - url: !file /local/lovelace-layout-card/layout-card.js
   type: js
-- url: !file /local/lovelace-useful-markdown-card/useful-markdown-card.js
-  type: module
 
   # Specially modified by helto
   # https://github.com/helto4real/hassio/tree/master/www/custom_cards
@@ -22,3 +14,9 @@
 
 - url: !file /local/more-info-card.js
   type: js
+
+  # Plugins installed through HACS
+- url: !file /local/community/lovelace-card-mod/card-mod.js
+  type: module
+- url: !file /local/community/lovelace-fold-entity-row/fold-entity-row.js
+  type: module

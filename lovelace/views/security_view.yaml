@@ -1,10 +1,10 @@
 title: Security
 icon: mdi:shield-home
 cards:
-  - !include cameras/barnrum.yaml
-  - !include cameras/kontor.yaml
-  - !include cameras/vardagsrum.yaml
-  - !include cameras/hallen.yaml
+  - !include /config/lovelace/cameras/barnrum.yaml
+  - !include /config/lovelace/cameras/kontor.yaml
+  - !include /config/lovelace/cameras/vardagsrum.yaml
+  - !include /config/lovelace/cameras/hallen.yaml
   - type: entities
     entities:
       - type: custom:hui-glance-card

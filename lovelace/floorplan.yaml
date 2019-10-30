@@ -1,3 +1,4 @@
+# lovelace_gen
 type: picture-elements
 image: !file /local/images/Bottenvåning.png
 elements:
@@ -38,6 +39,7 @@ elements:
   {{ dimlamp('light.taklampa_kontoret', 82, 68) }}
   {{ lamp('light.kontor_fonster', 83, 87) }}
   {{ dimlamp('light.skrivbordslampa_1', 88, 58) }}
+  {{ badge('sensor.kontoret_temperature', 82, 80) }}
 
   # Lilla hallen
   {{ dimlamp('light.lilla_hallen', 72, 53) }}
@@ -76,6 +78,7 @@ elements:
   {{ icon('switch.ventilation', 27, 20) }}
 
 # Utomhus
+  {{ badge('sensor.utomhus_temp', 5, 10) }}
   {{ dimlamp('light.baksida', 35, 5) }}
   {{ dimlamp('light.mellangang', 10, 30) }}
   {{ dimlamp('light.uppfart', 5, 94) }}

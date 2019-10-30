@@ -2,62 +2,6 @@ title: Dashboard
 path: dashboard
 icon: mdi:home-assistant
 panel: true
-popup_cards:
-  vacuum.xiaomi_vacuum_cleaner:
-    title: Dammsugare
-    card: !include vacuum_card.yaml
-
-  binary_sensor.door_open:
-    title: Öppna dörrar
-    card:
-      type: vertical-stack
-      cards:
-      - type: entities
-        entities: &door_entities
-          - binary_sensor.hall_ytterdorr
-          - binary_sensor.tvattstuga_ytterdorr
-          - binary_sensor.vardagsrum_ytterdorr
-          - binary_sensor.sovrum_ytterdorr
-      - type: history-graph
-        entities: *door_entities
-
-  device_tracker.thomas_presence:
-    title: Thomas
-    large: true
-    card:
-      type: vertical-stack
-      cards:
-      - type: entities
-        entities: &thomas_entities
-        - device_tracker.thomas_iphone_beta
-        - device_tracker.thomas_iphone_2
-        - sensor.thomas_iphone_bt
-        - sensor.thomas_iphone_bt2
-      - type: history-graph
-        entities:
-        - device_tracker.thomas_presence
-      - type: history-graph
-        entities: *thomas_entities
-
-  device_tracker.anneli_presence:
-    title: Anneli
-    large: true
-    card:
-      type: vertical-stack
-      cards:
-      - type: entities
-        entities: &anneli_entities
-        - device_tracker.anneli_lovn
-        - device_tracker.anneli_loven
-        - sensor.anneli_iphone_bt
-        - sensor.anneli_iphone_bt2
-        - sensor.anneli_klocka_bt
-        - sensor.anneli_klocka_bt2
-      - type: history-graph
-        entities:
-        - device_tracker.anneli_presence
-      - type: history-graph
-        entities: *anneli_entities
 cards:
   - type: custom:layout-card
     layout: vertical
@@ -87,7 +31,7 @@ cards:
       max_width: 960
       layout: vertical
       cards:
-      - type: custom:useful-markdown-card
+      - type: markdown
         style: |
           ha-card {
             padding-top: 24px;
@@ -95,13 +39,14 @@ cards:
           h1 {
             text-align: center;
             font-size: 6em;
+            margin-bottom: 0;
           }
           h2 {
             text-align: center;
           }
         content: |
-          # [[ sensor.time ]]
-          ## [[ sensor.date ]]
+          # {{ states("sensor.time") }}
+          ## {{ states("sensor.date") }} V.{{ states("sensor.week") }}
       - type: custom:weather-card
         entity: weather.smhi_home
         icons: /local/weather_icons/

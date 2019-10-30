@@ -1,8 +1,12 @@
 title: Diverse
 icon: mdi:home-assistant
 cards:
-  - !include floorplan.yaml {"no_other":"true"}
-  - !include floorplan.yaml {"no_light":"true"}
-  - !include coffee_card.yaml
-  - !include temperatures_card.yaml
-  - !include power_card.yaml
+  - !include
+    - /config/lovelace/floorplan.yaml
+    - {"no_other":"true"}
+  - !include
+    - /config/lovelace/floorplan.yaml
+    - {"no_light":"true"}
+  - !include /config/lovelace/coffee_card.yaml
+  - !include /config/lovelace/temperatures_card.yaml
+  - !include /config/lovelace/power_card.yaml

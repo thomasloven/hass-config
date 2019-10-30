@@ -11,9 +11,18 @@ entities:
       entity: switch.kaffebryggare
       icon: mdi:coffee
     items:
-      - input_boolean.cfe_on
-      - type: custom:time-input-row
-        entity: input_datetime.cfe_on
+      - entity: input_boolean.cfe_on
+        style: |
+          :host {
+            --paper-item-icon-color: {% if is_state(config.entity, 'on') %} var(--paper-item-active-color) {% else %} var(--paper-item-color) {% endif %};
+          }
+
+      - entity: input_datetime.cfe_on
       - type: section
-      - input_boolean.cfe_off
+      - entity: input_boolean.cfe_off
+        debug_cardmod: true
+        style: |
+          :host {
+            --paper-item-icon-color: {% if is_state(config.entity, 'on') %} var(--paper-item-active-color) {% else %} var(--paper-item-color) {% endif %};
+          }
       - input_number.cfe_off

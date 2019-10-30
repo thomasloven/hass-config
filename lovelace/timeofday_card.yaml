@@ -6,22 +6,20 @@ entities:
     name: Tid
   - entity: sensor.date
     name: Datum
+  - entity: sensor.week
+    name: Vecka
   - type: section
     label: Tid på dygnet
   - entity: input_select.tod
     name: ' '
   - entity: input_datetime.tod_morning
     name: Morgon
-    type: custom:time-input-row
   - entity: input_datetime.tod_day
     name: Dag
-    type: custom:time-input-row
   - entity: input_datetime.tod_evening
     name: Kväll
-    type: custom:time-input-row
   - entity: input_datetime.tod_night
     name: Natt
-    type: custom:time-input-row
 
   - type: section
   - entity: switch.tod_dark
