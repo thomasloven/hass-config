@@ -3,6 +3,7 @@ homeassistant:
     package.node_anchors:
       hvac_switch: &hvac_switch switch.ventilation
       hvac_sensor: &hvac_sensor sensor.badrum_humidity
+      hvac_ref: &hvac_ref sensor.utomhus_humidity
       common: &common
         package: hvac
 
@@ -25,9 +26,8 @@ automation:
   - alias: HVAC - Auto on
     initial_state: True
     trigger:
-      - platform: numeric_state
-        entity_id: *hvac_sensor
-        above: 60
+      - platform: template
+        value_template: "{{ states('sensor.badrum_humidity')|int > (states('sensor.vardagsrum_humidity')|int + 10) }}"
     action:
       - service: homeassistant.turn_on
         data:
@@ -37,9 +37,8 @@ automation:
   - alias: HVAC - Auto off
     initial_state: True
     trigger:
-      - platform: numeric_state
-        entity_id: *hvac_sensor
-        below: 50
+      - platform: template
+        value_template: "{{ states('sensor.badrum_humidity')|int < (states('sensor.vardagsrum_humidity')|int + 10) }}"
         for:
           minutes: 15
     action:
