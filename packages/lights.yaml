@@ -76,3 +76,18 @@ light:
       - light.taklampa_koket
       - light.taklampa_kontoret
       - light.vardagsrum
+
+circadian_lighting:
+
+switch:
+  - platform: circadian_lighting
+    lights_ct:
+      - light.taklampa_kontoret
+      - light.lilla_hallen
+      - light.stora_hallen
+      - light.takflakt_1
+      - light.takflakt_2
+      - light.takflakt_3
+      - light.takflakt_4
+      - light.vardagsrum
+      - light.taklampa_koket
