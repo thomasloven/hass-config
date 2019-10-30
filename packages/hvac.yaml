@@ -6,6 +6,12 @@ homeassistant:
       hvac_ref: &hvac_ref sensor.utomhus_humidity
       common: &common
         package: hvac
+    sensor.vpump_dir0:
+      <<: *common
+    sensor.vpump_dir1:
+      <<: *common
+    sensor.vpump_dir2:
+      <<: *common
 
 automation:
   - alias: HVAC - Timer off
@@ -47,3 +53,16 @@ automation:
           entity_id: *hvac_switch
       - service: script.info_message
         data: { message: "Torrt - takfläkt av" }
+
+sensor:
+  - platform: template
+    sensors:
+      vpump_dir0:
+        value_template: "{{ state_attr('binary_sensor.vibration_sensor', 'orientation')[0]|float }}"
+        unit_of_measurement: "r.u."
+      vpump_dir1:
+        value_template: "{{ state_attr('binary_sensor.vibration_sensor', 'orientation')[1]|float }}"
+        unit_of_measurement: "r.u."
+      vpump_dir2:
+        value_template: "{{ state_attr('binary_sensor.vibration_sensor', 'orientation')[2]|float }}"
+        unit_of_measurement: "r.u."
