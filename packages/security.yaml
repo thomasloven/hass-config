@@ -38,7 +38,7 @@ sensor:
   - platform: mold_indicator
     indoor_temp_sensor: sensor.tygvind_temp
     indoor_humidity_sensor: sensor.tygvind_humidity
-    outdoor_temp_sensor: sensor.elmatare_0
+    outdoor_temp_sensor: sensor.utomhus_temp
     calibration_factor: 3.0
 
     # 2019-06-11 22:45
@@ -58,7 +58,7 @@ automation:
         entity_id: binary_sensor.home_occupied
         state: 'off'
     action:
-      - service: notify.ios_thomas_iphone
+      - service: notify.mobile_app_thomas_iphone
         data:
           title: "LARM!"
           message: "En dörr öppnades!"
@@ -68,7 +68,7 @@ automation:
       entity_id:  binary_sensor.koket_vatten
       to: 'on'
     action:
-      - service: notify.ios_thomas_iphone
+      - service: notify.mobile_app_thomas_iphone
         data:
           title: "LARM!"
           message: "Blött i köksskåpet!"
@@ -80,7 +80,7 @@ automation:
       for:
         hours: 1
     action:
-      - service: notify.ios_thomas_iphone
+      - service: notify.mobile_app_thomas_iphone
         data_template:
           title: "LARM!"
           message: "Hög mögelrisk på vinden! {{ states('sensor.mold_indicator') }}%"

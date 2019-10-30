@@ -45,7 +45,7 @@ automation:
       for:
         minutes: 5
     action:
-      - service: notify.ios_thomas_iphone
+      - service: notify.mobile_app_thomas_iphone
         data:
           title: "Fikadax!"
           message: "Kaffet är färdigt!"
