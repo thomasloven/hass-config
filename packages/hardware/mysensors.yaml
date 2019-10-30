@@ -28,16 +28,16 @@ homeassistant:
 #     mysensors: debug
 #     homeassistant.components.mysensors: debug
 
-mysensors:
-  gateways:
-    - device: mysensors
-      persistence_file: "/config/mysensors.json"
-      tcp_port: 2000
-      nodes:
-        2: { name: Vardagsrum }
-        24: { name: Skrivbordslampa }
-        26: { name: Elmätare }
-  version: "2.0"
+# mysensors:
+#   gateways:
+#     - device: mysensors
+#       persistence_file: "/config/mysensors.json"
+#       tcp_port: 2000
+#       nodes:
+#         2: { name: Vardagsrum }
+#         24: { name: Skrivbordslampa }
+#         26: { name: Elmätare }
+#   version: "2.0"
 
 # The power meter has two values for one sensor, and which one is logged is a bit random. Therefore replace it with a custom template sensor which always gets the correct value
 sensor:
