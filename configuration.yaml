@@ -20,6 +20,19 @@ logger:
   default: info
   logs:
     homeassistant.components.http.view: warn
+influxdb:
+  host: influx
+  username: hass
+  password: hass
+  database: hass
+
+homekit:
+  ip_address: !secret host_ip
+  auto_start: false
+  filter:
+    include_domains:
+      - light
+      - switch
 
 http:
   # mydomain.com:443 - proxied by nginx to port 8123
@@ -32,6 +45,11 @@ cloud:
 stream:
 
 python_script:
+
+hacs:
+  token: !secret hacs_token
+
+lovelace_gen:
 
 automation:
   - alias: Hallampa på
@@ -47,6 +65,13 @@ automation:
     action:
       - service: light.turn_on
         entity_id: light.stora_hallen
+  - alias: Start homekit
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - delay: 00:05
+      - service: homekit.start
 
 browser_mod:
   devices:

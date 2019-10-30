@@ -66,6 +66,30 @@ services:
       MYSQL_PASSWORD: hass
       # The following value is overridden in docker-compose.override.yml
       MYSQL_ROOT_PASSWORD: secret
+  influx:
+    container_name: InfluxDB
+    image: influxdb
+    restart: always
+    volumes:
+      - /root/docker/influxdb:/var/lib/influxdb
+    environment:
+      TZ: Europe/Stockholm
+      INFLUXDB_DB: hass
+      INFLUXDB_USER: hass
+      INFLUXDB_USER_PASSWORD: hass
+
+  grafana:
+    container_name: Grafana
+    image: grafana/grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - /root/docker/grafana:/var/lib/grafana
+    user: "0"
+    environment:
+      TZ: Europe/Stockholm
+
 
   mosquitto:
     container_name: Mosquitto
@@ -90,9 +114,12 @@ services:
       - "8123:8123"
     volumes:
       - /root/docker/hass/home-assistant:/config
+    working_dir: /config
     environment:
       TZ: Europe/Stockholm
       XDG_CACHE_HOME: /config/.data
+      PIP_USER: "yes"
+      PYTHONUSERBASE: /config/.local
 
   appdaemon:
     container_name: AppDaemon
