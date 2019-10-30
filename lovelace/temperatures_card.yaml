@@ -8,8 +8,8 @@ entities:
     hours_to_show: 24
     entities:
       - sensor.vardagsrum_0
-      - sensor.temperatursensor_atelje_1_0
-      - sensor.elmatare_0
+      - sensor.kontoret_temperature
+      - sensor.utomhus_temp
       - sensor.badrum_temp
   - type: section
     label: Senaste veckan
@@ -17,6 +17,6 @@ entities:
     hours_to_show: 168
     entities:
       - sensor.vardagsrum_0
-      - sensor.temperatursensor_atelje_1_0
+      - sensor.utomhus_temp
       # - sensor.elmatare_0
       - sensor.badrum_temp
