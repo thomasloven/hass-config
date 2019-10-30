@@ -1,0 +1,3 @@
+cube:
+  module: cube
+  class: Cube

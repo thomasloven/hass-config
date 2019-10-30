@@ -148,9 +148,11 @@ class LightEntity(Entity):
 class SwitchEntity(Entity):
 
     def set_state(self, old, new):
-        if new == True:
+        if new == "on" or new == True:
+            self._hass.call_service("switch/turn_on", entity_id = self.entity_id)
             self._state = "on"
-        if new == False:
+        if new == "off" or new == False:
+            self._hass.call_service("switch/turn_off", entity_id = self.entity_id)
             self._state = "off"
 
     def service_callback(self, data):
