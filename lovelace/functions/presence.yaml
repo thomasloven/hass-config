@@ -1,0 +1,40 @@
+# lovelace_gen
+type: picture-entity
+entity: device_tracker.{{person}}_presence
+image: /local/images/{{person}}_bw.png
+show_name: false
+show_state: false
+state_image:
+  "home": /local/images/{{person}}_clr.png
+  "just_arrived": /local/images/{{person}}_clr.png
+tap_action:
+  action: call-service
+  service: browser_mod.command
+  service_data:
+    command: popup
+    deviceID: [this]
+    title: {{ person|capitalize }}
+    large: true
+    card:
+      type: vertical-stack
+      cards:
+      - type: entities
+        entities: &entities
+      {% if person == "thomas" %}
+          - device_tracker.thomas_iphone_beta
+          - device_tracker.thomas_iphone_2
+          - sensor.thomas_iphone_bt
+          - sensor.thomas_iphone_bt2
+      {% elif person == "anneli" %}
+          - device_tracker.anneli_lovn
+          - device_tracker.anneli_loven
+          - sensor.anneli_iphone_bt
+          - sensor.anneli_iphone_bt2
+          - sensor.anneli_klocka_bt
+          - sensor.anneli_klocka_bt2
+      {% endif %}
+      - type: history-graph
+        entities:
+        - device_tracker.{{person}}_presence
+      - type: history-graph
+        entities: *entities

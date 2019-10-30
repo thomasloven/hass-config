@@ -1,0 +1,10 @@
+type: vertical-stack
+cards:
+- type: entities
+  entities: &door_entities
+    - binary_sensor.hall_ytterdorr
+    - binary_sensor.tvattstuga_ytterdorr
+    - binary_sensor.vardagsrum_ytterdorr
+    - binary_sensor.sovrum_ytterdorr
+- type: history-graph
+  entities: *door_entities

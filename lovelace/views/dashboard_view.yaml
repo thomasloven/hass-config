@@ -10,21 +10,15 @@ cards:
     rtl: true
     cards:
     - type: custom:layout-card
-      column_width: 150
-      max_width: 200
+      column_width: 200
+      max_width: 300
       cards:
-      - type: entity-button
-        entity: switch.varme_jst
-        name: JST
-        icon: mdi:fan
-        tap_action:
-          action: toggle
-      - type: entity-button
-        entity: switch.varme_mhr
-        name: MHR
-        icon: mdi:fan
-        tap_action:
-          action: toggle
+        - !include
+          - /config/lovelace/functions/car.yaml
+          - car: peugeot
+        - !include
+          - /config/lovelace/functions/car.yaml
+          - car: golf
     - break
     - type: custom:layout-card
       column_width: 350
@@ -53,22 +47,12 @@ cards:
       - break
       - type: horizontal-stack
         cards:
-          - type: picture-entity
-            entity: device_tracker.thomas_presence
-            image: /local/images/thomas_bw.jpg
-            show_name: false
-            show_state: false
-            state_image:
-              "home": /local/images/thomas_clr.jpg
-              "just_arrived": /local/images/thomas_clr.jpg
-          - type: picture-entity
-            entity: device_tracker.anneli_presence
-            image: /local/images/anneli_bw.png
-            show_name: false
-            show_state: false
-            state_image:
-              "home": /local/images/anneli_clr.png
-              "just_arrived": /local/images/anneli_clr.png
+          - !include
+            - /config/lovelace/functions/presence.yaml
+            - person: thomas
+          - !include
+            - /config/lovelace/functions/presence.yaml
+            - person: anneli
       - type: horizontal-stack
         cards:
           - type: entity-button
@@ -87,8 +71,16 @@ cards:
           - type: entity-button
             entity: vacuum.xiaomi_vacuum_cleaner
             name: Dammsugare
+            tap_action: !include
+              - /config/lovelace/functions/popup.yaml
+              - title: Dammsugare
+                card: /config/lovelace/popups/vacuum.yaml
           - type: entity-button
             entity: binary_sensor.sopor
           - type: entity-button
             entity: binary_sensor.door_open
             name: Öppen dörr
+            tap_action: !include
+              - /config/lovelace/functions/popup.yaml
+              - title: Öppna dörrar
+                card: /config/lovelace/popups/doors.yaml

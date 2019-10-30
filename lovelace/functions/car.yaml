@@ -1,0 +1,38 @@
+# lovelace_gen
+type: picture-elements
+entity: sensor.{{car}}_bt
+image: /local/images/{{car}}_clr.jpg
+elements:
+  - type: image
+    image: /local/images/{{car}}_clr.jpg
+    entity: sensor.{{car}}_bt
+    tap_action:
+      action: call-service
+      service: homeassistant.toggle
+      service_data:
+        entity_id: switch.varme_{{car}}
+    style:
+      left: 50%
+      top: 50%
+      width: 100%
+      height: 100%
+  - type: state-icon
+    entity: switch.varme_{{car}}
+    style:
+      bottom: 0
+      left: 0
+      transform: translate(0,0)
+      background: rgba(0,0,0,0.5)
+      width: 100px
+    icon: mdi:fan
+    tap_action:
+      action: toggle
+  - type: state-label
+    entity: sensor.varme_{{car}}_power
+    graph: line
+    style:
+      bottom: 0
+      left: 30px
+      transform: translate(0,0)
+      --primary-text-color: white
+      color: white

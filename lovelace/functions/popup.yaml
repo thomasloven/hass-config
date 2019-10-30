@@ -1,0 +1,10 @@
+# lovelace_gen
+action: call-service
+service: browser_mod.command
+service_data:
+  command: popup
+  deviceID:
+    - this
+  title: {{ title }}
+  card: !include {{ card }}
+  large: {{ large | default("false") }}
